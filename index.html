@@ -2,24 +2,32 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Study</title>
   <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #f7f7f8; color: #111; }
-    main { max-width: 820px; margin: 0 auto; padding: 48px 20px 80px; }
-    h1 { margin: 0 0 12px; font-size: 36px; }
-    p { margin: 0; color: #666; line-height: 1.6; }
-    .card { margin-top: 28px; padding: 24px; background: #fff; border: 1px solid #e5e5e5; border-radius: 16px; }
+    body{margin:0;background:#f6f7fb;color:#111827;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif}
+    main{max-width:960px;margin:auto;padding:48px 20px 80px}
+    h1{font-size:40px;margin:0 0 10px}.lead{color:#6b7280;margin:0 0 28px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:24px;box-shadow:0 10px 30px rgba(17,24,39,.06)}
+    img{width:100%;height:auto;border-radius:12px;display:block}.meta{color:#6b7280;font-size:14px}.text{white-space:pre-wrap;line-height:1.8;background:#fcfcfd;border:1px solid #e5e7eb;border-radius:14px;padding:16px}
   </style>
 </head>
 <body>
-  <main>
-    <h1>Study</h1>
-    <p>수학 문제를 정리하고 게시하는 공간입니다.</p>
-    <section class="card">
-      <p>첫 번째 문제가 곧 게시됩니다.</p>
-    </section>
-  </main>
+<main>
+  <h1>Study</h1>
+  <p class="lead">수학 문제를 정리하고 게시하는 공간입니다.</p>
+  <article class="card">
+    <div class="meta">Problem 01 · 2026-09-03</div>
+    <h2>14번 문제 — 로그와 n제곱근</h2>
+    <img src="problems/problem-001.jpg" alt="수학 문제 14번 원본 사진">
+    <h3>문제 원문</h3>
+    <div class="text">14. 2 이상의 자연수 n에 대하여
+
+log₂ a + log₂ |2 - 27/n| - 2
+
+의 n제곱근 중 실수인 것의 개수를 f(n)이라 하자. f(2m) ≤ 1을 만족시키는 자연수 m의 개수가 2가 되도록 하는 모든 자연수 a의 값의 합은? [4점]
+
+① 50   ② 54   ③ 58   ④ 62   ⑤ 66</div>
+  </article>
+</main>
 </body>
 </html>
