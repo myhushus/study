@@ -73,7 +73,7 @@ const nodes={
   b1_2:{level:2,title:'보조 문제 · 양수일 때',meta:'도움 문제 1의 보조 단계',text:'A > 0일 때 방정식 x^(2m) = A의 실수해는 몇 개인가?',help:'개수만 숫자로 입력하세요.',parent:'b1_1',child:'b1_3',branch:1,answer:v=>num(v)===2},
   b1_3:{level:3,title:'더 쉬운 보조 문제',meta:'도움 문제 1 · 최하위 단계',text:'방정식 x⁴ = 16의 실수해는 몇 개인가?',help:'실제 실수해를 떠올려 개수를 세어 보세요.',parent:'b1_2',child:null,branch:1,answer:v=>num(v)===2},
 
-  b2_1:{level:1,title:'도움 문제 2 · 로그 부등식 정리',meta:'핵심 개념 2/3',text:'다음 부등식을 로그가 없는 형태로 끝까지 정리해 보세요.\n\nlog₂a + log₂|2 - 27/(2m)| - 2 ≤ 0\n\n답을 a|4m-27|≤8m 꼴로 입력하세요.',help:'공백과 × 기호의 차이는 무시합니다.',parent:'root',child:'b2_2',branch:2,answer:v=>normExpr(v)==='a|4m-27|<=8m'},
+  b2_1:{level:1,title:'도움 문제 2 · 로그 부등식 정리',meta:'핵심 개념 2/3',text:'다음 부등식을 로그가 없는 형태로 끝까지 정리해 보세요.\n\nlog₂a + log₂|2 - 27/(2m)| - 2 ≤ 0',help:'공백과 × 기호의 차이는 무시합니다.',parent:'root',child:'b2_2',branch:2,answer:v=>normExpr(v)==='a|4m-27|<=8m'},
   b2_2:{level:2,title:'보조 문제 · 로그 부등식',meta:'도움 문제 2의 보조 단계',text:'log₂ X ≤ 2일 때, 양수 X의 범위는 X ≤ □ 이다. □에 들어갈 수를 구하세요.',help:'밑이 2인 로그는 증가함수입니다.',parent:'b2_1',child:'b2_3',branch:2,answer:v=>num(v)===4},
   b2_3:{level:3,title:'더 쉬운 보조 문제',meta:'도움 문제 2 · 최하위 단계',text:'log₂ 8의 값은 얼마인가?',help:'2를 몇 번 곱하면 8이 되는지 생각해 보세요.',parent:'b2_2',child:null,branch:2,answer:v=>num(v)===3},
 
