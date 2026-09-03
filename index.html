@@ -3,31 +3,147 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Study</title>
+  <title>Study · Problem 01</title>
+  <meta name="description" content="오답이면 더 쉬운 보조문제로 내려가고, 정답이면 상위 문제로 돌아가는 단계형 수학 학습">
   <style>
-    body{margin:0;background:#f6f7fb;color:#111827;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif}
-    main{max-width:960px;margin:auto;padding:48px 20px 80px}
-    h1{font-size:40px;margin:0 0 10px}.lead{color:#6b7280;margin:0 0 28px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:24px;box-shadow:0 10px 30px rgba(17,24,39,.06)}
-    img{width:100%;height:auto;border-radius:12px;display:block}.meta{color:#6b7280;font-size:14px}.text{white-space:pre-wrap;line-height:1.8;background:#fcfcfd;border:1px solid #e5e7eb;border-radius:14px;padding:16px}
+    :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--blue2:#eff6ff;--green:#15803d;--green2:#f0fdf4;--red:#b91c1c;--red2:#fef2f2;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;color-scheme:light}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text)}button,input{font:inherit}a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+    main{max-width:880px;margin:auto;padding:32px 18px 72px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}.brand{font-weight:800;font-size:26px}.toplinks{display:flex;gap:14px;font-size:14px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 30px rgba(17,24,39,.06);overflow:hidden}.head{padding:22px 22px 10px}.meta{font-size:13px;color:var(--muted);margin-bottom:8px}.title{font-size:27px;line-height:1.35;margin:0}.progress{display:flex;gap:7px;flex-wrap:wrap;padding:0 22px 18px}.chip{padding:6px 9px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--muted);background:#fff}.chip.done{border-color:#bbf7d0;background:var(--green2);color:var(--green)}.chip.now{border-color:#bfdbfe;background:var(--blue2);color:var(--blue);font-weight:700}
+    .body{padding:0 22px 24px}.imagebox{margin:4px 0 20px}.imagebox img{width:100%;display:block;border-radius:14px;border:1px solid var(--line)}.problem{white-space:pre-wrap;line-height:1.85;font-size:17px;background:#fcfcfd;border:1px solid var(--line);border-radius:16px;padding:18px;margin:0 0 20px}.helper{font-size:14px;color:var(--muted);margin:-8px 0 18px;line-height:1.6}
+    .answer{display:flex;gap:10px}.answer input{flex:1;min-width:0;padding:14px 15px;border:1px solid #cbd5e1;border-radius:13px;outline:none}.answer input:focus{border-color:#93c5fd;box-shadow:0 0 0 3px #dbeafe}.btn{border:0;border-radius:13px;padding:13px 17px;font-weight:700;cursor:pointer}.btn.primary{background:var(--blue);color:#fff}.btn.secondary{background:#f3f4f6;color:#111827}.btn:disabled{opacity:.45;cursor:not-allowed}
+    .feedback{margin-top:14px;border-radius:13px;padding:13px 14px;line-height:1.55;display:none}.feedback.good{display:block;background:var(--green2);color:#166534;border:1px solid #bbf7d0}.feedback.bad{display:block;background:var(--red2);color:#991b1b;border:1px solid #fecaca}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.actions .btn{font-size:14px}
+    .solution{display:none;margin-top:20px;padding:18px;border:1px solid #bbf7d0;background:var(--green2);border-radius:16px;line-height:1.8}.solution.show{display:block}.solution h3{margin-top:0}.footer{color:var(--muted);font-size:13px;text-align:center;margin-top:22px;line-height:1.6}
+    @media(max-width:620px){main{padding:20px 12px 56px}.top{align-items:flex-start}.toplinks{flex-direction:column;gap:6px;text-align:right}.head,.body{padding-left:16px;padding-right:16px}.progress{padding-left:16px;padding-right:16px}.title{font-size:22px}.problem{font-size:16px}.answer{flex-direction:column}.answer .btn{width:100%}}
   </style>
 </head>
 <body>
 <main>
-  <h1>Study</h1>
-  <p class="lead">수학 문제를 정리하고 게시하는 공간입니다.</p>
+  <div class="top">
+    <div class="brand">Study</div>
+    <div class="toplinks">
+      <a href="#" id="originalLink">원래 문제 보기</a>
+      <a href="#" id="resetLink">처음부터 다시</a>
+    </div>
+  </div>
+
   <article class="card">
-    <div class="meta">Problem 01 · 2026-09-03</div>
-    <h2>14번 문제 — 로그와 n제곱근</h2>
-    <img src="problems/problem-001.jpg" alt="수학 문제 14번 원본 사진">
-    <h3>문제 원문</h3>
-    <div class="text">14. 2 이상의 자연수 n에 대하여
+    <div class="head">
+      <div class="meta" id="meta"></div>
+      <h1 class="title" id="title"></h1>
+    </div>
+    <div class="progress" id="progress"></div>
+    <div class="body">
+      <div class="imagebox" id="imagebox"><img src="problems/problem-001.jpg" alt="수학 문제 14번 원본 사진"></div>
+      <div class="problem" id="problem"></div>
+      <div class="helper" id="helper"></div>
+      <form class="answer" id="answerForm">
+        <input id="answerInput" autocomplete="off" inputmode="text" placeholder="정답을 직접 입력하세요" aria-label="정답 입력">
+        <button class="btn primary" type="submit">정답 확인</button>
+      </form>
+      <div class="feedback" id="feedback"></div>
+      <div class="actions" id="actions"></div>
+      <section class="solution" id="solution">
+        <h3>전체 풀이</h3>
+        <div>
+          <p>식 전체를 Aₙ이라 두면, 2m은 짝수이므로 f(2m) ≤ 1은 A₂ₘ ≤ 0과 같습니다.</p>
+          <p>따라서 log₂a + log₂|2 - 27/(2m)| - 2 ≤ 0이고, 이를 정리하면 a|4m - 27| ≤ 8m을 얻습니다.</p>
+          <p>m=6에서는 a≤16, m=7에서는 a≤56입니다. 정확히 두 개의 m만 만족해야 하므로 바로 바깥 m=8이 만족하지 않아야 해서 5a&gt;64, 즉 a≥13입니다.</p>
+          <p>따라서 13≤a≤16이고, 가능한 a의 합은 13+14+15+16 = <strong>58</strong>입니다.</p>
+        </div>
+      </section>
+    </div>
+  </article>
+  <div class="footer">오답이면 한 단계 더 쉬운 문제로 내려갑니다. 정답이면 바로 한 단계 위 문제로 돌아갑니다.</div>
+</main>
+
+<script>
+const originalText=`14. 2 이상의 자연수 n에 대하여
 
 log₂ a + log₂ |2 - 27/n| - 2
 
 의 n제곱근 중 실수인 것의 개수를 f(n)이라 하자. f(2m) ≤ 1을 만족시키는 자연수 m의 개수가 2가 되도록 하는 모든 자연수 a의 값의 합은? [4점]
 
-① 50   ② 54   ③ 58   ④ 62   ⑤ 66</div>
-  </article>
-</main>
+① 50   ② 54   ③ 58   ④ 62   ⑤ 66`;
+
+const nodes={
+  root:{level:0,title:'14번 문제 — 로그와 n제곱근',meta:'Problem 01 · 원래 문제',text:originalText,help:'보기는 참고해도 좋지만 정답은 숫자로 직접 입력하세요.',parent:null,branch:null,answer:v=>num(v)===58},
+
+  b1_1:{level:1,title:'도움 문제 1 · 짝수 제곱근과 부호',meta:'핵심 개념 1/3',text:'A의 2m제곱근 중 실수인 것의 개수가 1개 이하라고 하자. 이때 A는 0보다 크다, 0 이하이다 중 어느 쪽인가?',help:'“0 이하”, “A≤0”, “<=0”처럼 입력할 수 있습니다.',parent:'root',child:'b1_2',branch:1,answer:v=>isNonPositive(v)},
+  b1_2:{level:2,title:'보조 문제 · 양수일 때',meta:'도움 문제 1의 보조 단계',text:'A > 0일 때 방정식 x^(2m) = A의 실수해는 몇 개인가?',help:'개수만 숫자로 입력하세요.',parent:'b1_1',child:'b1_3',branch:1,answer:v=>num(v)===2},
+  b1_3:{level:3,title:'더 쉬운 보조 문제',meta:'도움 문제 1 · 최하위 단계',text:'방정식 x⁴ = 16의 실수해는 몇 개인가?',help:'실제 실수해를 떠올려 개수를 세어 보세요.',parent:'b1_2',child:null,branch:1,answer:v=>num(v)===2},
+
+  b2_1:{level:1,title:'도움 문제 2 · 로그 부등식 정리',meta:'핵심 개념 2/3',text:'다음 부등식을 로그가 없는 형태로 끝까지 정리해 보세요.\n\nlog₂a + log₂|2 - 27/(2m)| - 2 ≤ 0\n\n답을 a|4m-27|≤8m 꼴로 입력하세요.',help:'공백과 × 기호의 차이는 무시합니다.',parent:'root',child:'b2_2',branch:2,answer:v=>normExpr(v)==='a|4m-27|<=8m'},
+  b2_2:{level:2,title:'보조 문제 · 로그 부등식',meta:'도움 문제 2의 보조 단계',text:'log₂ X ≤ 2일 때, 양수 X의 범위는 X ≤ □ 이다. □에 들어갈 수를 구하세요.',help:'밑이 2인 로그는 증가함수입니다.',parent:'b2_1',child:'b2_3',branch:2,answer:v=>num(v)===4},
+  b2_3:{level:3,title:'더 쉬운 보조 문제',meta:'도움 문제 2 · 최하위 단계',text:'log₂ 8의 값은 얼마인가?',help:'2를 몇 번 곱하면 8이 되는지 생각해 보세요.',parent:'b2_2',child:null,branch:2,answer:v=>num(v)===3},
+
+  b3_1:{level:1,title:'도움 문제 3 · a의 범위',meta:'핵심 개념 3/3',text:'a|4m-27| ≤ 8m을 이용하자. 조건을 만족하는 자연수 m이 정확히 2개가 되도록 하는 자연수 a의 범위를 구하세요.',help:'“13≤a≤16”처럼 입력하세요.',parent:'root',child:'b3_2',branch:3,answer:v=>isRange13to16(v)},
+  b3_2:{level:2,title:'보조 문제 · 경계값 찾기',meta:'도움 문제 3의 보조 단계',text:'m=6이 조건을 만족할 수 있는 a의 최댓값과, m=8이 조건을 만족하지 않게 하는 a의 최솟값을 차례로 구하세요.',help:'예: 20, 7 처럼 두 수를 쉼표로 입력하세요.',parent:'b3_1',child:'b3_3',branch:3,answer:v=>pair(v,16,13)},
+  b3_3:{level:3,title:'더 쉬운 보조 문제',meta:'도움 문제 3 · 최하위 단계',text:'m=8을 대입하면 5a ≤ 64이다. 이 부등식을 만족하지 않는 가장 작은 자연수 a는 얼마인가?',help:'64÷5 = 12.8입니다.',parent:'b3_2',child:null,branch:3,answer:v=>num(v)===13}
+};
+
+const state=loadState();
+let current=state.current||'root';
+
+function loadState(){try{return JSON.parse(localStorage.getItem('study-p001')||'{}')}catch{return {}}}
+function saveState(){localStorage.setItem('study-p001',JSON.stringify({current,completed:state.completed||[],solved:!!state.solved}))}
+function num(v){const s=String(v).trim().replace(/개/g,'').replace(/,/g,'');const n=Number(s);return Number.isFinite(n)?n:null}
+function compact(v){return String(v).toLowerCase().replace(/\s+/g,'').replace(/≤/g,'<=').replace(/≥/g,'>=').replace(/[×·]/g,'*').replace(/－/g,'-')}
+function isNonPositive(v){const s=compact(v).replace(/^a/,'');return ['<=0','0이하','0이하다','0이하이다','음수또는0'].some(x=>s.includes(x))}
+function normExpr(v){return compact(v).replace(/\*/g,'').replace(/\|27-4m\|/g,'|4m-27|')}
+function isRange13to16(v){let s=compact(v).replace(/a/g,'');return s.includes('13<=')&&s.includes('<=16')||s==='13~16'||s==='13-16'}
+function pair(v,a,b){const m=String(v).match(/-?\d+(?:\.\d+)?/g)||[];return Number(m[0])===a&&Number(m[1])===b}
+
+const $=id=>document.getElementById(id);
+function render(){
+  const n=nodes[current];
+  $('meta').textContent=n.meta;
+  $('title').textContent=n.title;
+  $('problem').textContent=n.text;
+  $('helper').textContent=n.help||'';
+  $('imagebox').style.display=current==='root'?'block':'none';
+  $('answerInput').value='';
+  $('answerInput').placeholder=current==='root'?'정답 숫자를 입력하세요':'정답을 입력하세요';
+  $('feedback').className='feedback';$('feedback').textContent='';
+  $('actions').innerHTML='';
+  $('solution').className=state.solved?'solution show':'solution';
+  renderProgress();
+  history.replaceState(null,'',current==='root'?'#problem':'#'+current);
+  setTimeout(()=>$('answerInput').focus(),50);
+}
+function renderProgress(){
+  const done=new Set(state.completed||[]);const n=nodes[current];
+  const items=[['원문',0],['개념 1',1],['개념 2',2],['개념 3',3]];
+  $('progress').innerHTML=items.map(([label,b])=>{
+    const cls=(b===0&&current==='root')||(b&&n.branch===b)?'chip now':(b&&done.has(b)?'chip done':'chip');
+    return `<span class="${cls}">${label}${b&&done.has(b)?' ✓':''}</span>`;
+  }).join('');
+}
+function nextBranch(){const done=new Set(state.completed||[]);for(const b of [1,2,3])if(!done.has(b))return `b${b}_1`;return 'b3_1'}
+function addButton(label,fn,kind='secondary'){const b=document.createElement('button');b.type='button';b.className='btn '+kind;b.textContent=label;b.onclick=fn;$('actions').appendChild(b)}
+function go(id){current=id;saveState();render()}
+function onCorrect(n){
+  $('feedback').className='feedback good';
+  if(current==='root'){
+    state.solved=true;saveState();$('feedback').textContent='정답입니다. 이 문제를 완료했습니다.';$('solution').className='solution show';addButton('처음부터 다시',reset);return;
+  }
+  if(n.level===1&&n.branch){state.completed=Array.from(new Set([...(state.completed||[]),n.branch])).sort()}
+  saveState();$('feedback').textContent='정답입니다. 바로 한 단계 위 문제로 돌아갑니다.';addButton(n.parent==='root'?'원래 문제 재도전':'상위 문제로',()=>go(n.parent),'primary');
+}
+function onWrong(n){
+  $('feedback').className='feedback bad';
+  if(current==='root'){
+    const dest=nextBranch();$('feedback').textContent='아직 정답이 아닙니다. 필요한 핵심 개념을 작은 문제로 먼저 풀어봅시다.';addButton('보조문제 풀기',()=>go(dest),'primary');return;
+  }
+  if(n.child){$('feedback').textContent='아직 정답이 아닙니다. 한 단계 더 쉬운 보조문제로 내려갑니다.';addButton('더 쉬운 문제 풀기',()=>go(n.child),'primary')}
+  else{$('feedback').textContent='아직 정답이 아닙니다. 이 단계의 핵심을 다시 생각해 보고 재도전해 보세요.';addButton('다시 풀기',()=>{ $('answerInput').value='';$('answerInput').focus();$('feedback').className='feedback';$('actions').innerHTML='';},'primary')}
+}
+$('answerForm').addEventListener('submit',e=>{e.preventDefault();const n=nodes[current];const v=$('answerInput').value;if(!v.trim())return;n.answer(v)?onCorrect(n):onWrong(n)});
+$('originalLink').addEventListener('click',e=>{e.preventDefault();go('root')});
+$('resetLink').addEventListener('click',e=>{e.preventDefault();reset()});
+function reset(){state.completed=[];state.solved=false;current='root';saveState();render()}
+
+const fromHash=location.hash.slice(1);if(nodes[fromHash])current=fromHash;render();
+</script>
 </body>
 </html>
