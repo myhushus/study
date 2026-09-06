@@ -23,7 +23,7 @@
     <div class="brand">Study</div>
     <div class="toplinks">
       <a href="problem-002.html">다음 문제</a>
-      <a href="#" id="originalLink">원래 문제 보기</a>
+      <a href="#" id="originalLink">원문 보기</a>
       <a href="#" id="resetLink">처음부터 다시</a>
     </div>
   </div>
@@ -68,7 +68,7 @@ log₂ a + log₂ |2 - 27/n| - 2
 ① 50   ② 54   ③ 58   ④ 62   ⑤ 66`;
 
 const nodes={
-  root:{level:0,title:'14번 문제 — 로그와 n제곱근',meta:'Problem 01 · 원래 문제',text:originalText,help:'보기는 참고해도 좋지만 정답은 숫자로 직접 입력하세요.',parent:null,branch:null,answer:v=>num(v)===58},
+  root:{level:0,title:'14번 문제 — 로그와 n제곱근',meta:'Problem 01 · 원문',text:originalText,help:'보기는 참고해도 좋지만 정답은 숫자로 직접 입력하세요.',parent:null,branch:null,answer:v=>num(v)===58},
   b1_1:{level:1,title:'도움 문제 1 · 짝수 제곱근과 부호',meta:'핵심 개념 1/3',text:'A의 2m제곱근 중 실수인 것의 개수가 1개 이하라고 하자. 이때 A는 0보다 크다, 0 이하이다 중 어느 쪽인가?',help:'“0 이하”, “A≤0”, “<=0”처럼 입력할 수 있습니다.',parent:'root',child:'b1_2',branch:1,answer:v=>isNonPositive(v)},
   b1_2:{level:2,title:'보조 문제 · 양수일 때',meta:'도움 문제 1의 보조 단계',text:'A > 0일 때 방정식 x^(2m) = A의 실수해는 몇 개인가?',help:'개수만 숫자로 입력하세요.',parent:'b1_1',child:'b1_3',branch:1,answer:v=>num(v)===2},
   b1_3:{level:3,title:'더 쉬운 보조 문제',meta:'도움 문제 1 · 최하위 단계',text:'방정식 x⁴ = 16의 실수해는 몇 개인가?',help:'실제 실수해를 떠올려 개수를 세어 보세요.',parent:'b1_2',child:null,branch:1,answer:v=>num(v)===2},
@@ -95,7 +95,7 @@ const $=id=>document.getElementById(id);
 function render(){
   const n=nodes[current];
   $('meta').textContent=n.meta;$('title').textContent=n.title;$('problem').textContent=n.text;$('helper').textContent=n.help||'';
-  $('imagebox').style.display=current==='root'?'block':'none';$('answerInput').value='';$('answerInput').placeholder=current==='root'?'정답 숫자를 입력하세요':'정답을 입력하세요';
+  $('imagebox').style.display=current==='root'?'block':'none';$('originalLink').style.display=current==='root'?'none':'';$('answerInput').value='';$('answerInput').placeholder=current==='root'?'정답 숫자를 입력하세요':'정답을 입력하세요';
   $('feedback').className='feedback';$('feedback').textContent='';$('actions').innerHTML='';$('solution').className=state.solved?'solution show':'solution';renderProgress();history.replaceState(null,'',current==='root'?'#problem':'#'+current);setTimeout(()=>$('answerInput').focus(),50);
 }
 function renderProgress(){
@@ -109,7 +109,7 @@ function onCorrect(n){
   $('feedback').className='feedback good';
   if(current==='root'){state.solved=true;saveState();$('feedback').textContent='정답입니다. 이 문제를 완료했습니다.';$('solution').className='solution show';addButton('처음부터 다시',reset);return;}
   if(n.level===1&&n.branch){state.completed=Array.from(new Set([...(state.completed||[]),n.branch])).sort()}
-  saveState();$('feedback').textContent='정답입니다. 바로 한 단계 위 문제로 돌아갑니다.';addButton(n.parent==='root'?'원래 문제 재도전':'상위 문제로',()=>go(n.parent),'primary');
+  saveState();$('feedback').textContent='정답입니다. 바로 한 단계 위 문제로 돌아갑니다.';addButton(n.parent==='root'?'원문 재도전':'상위 문제로',()=>go(n.parent),'primary');
 }
 function onWrong(n){
   $('feedback').className='feedback bad';
