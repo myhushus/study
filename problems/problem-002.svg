@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1774" height="887" viewBox="0 0 1774 887">
+  <rect width="1774" height="887" fill="white"/>
+  <g fill="#000" font-family="Georgia, 'Noto Serif KR', 'Apple SD Gothic Neo', serif">
+    <text x="55" y="205" font-size="92" font-weight="700">29.</text>
+    <text x="210" y="200" font-size="66">다음 조건을 만족시키는 자연수 <tspan font-style="italic">a, b, c, d</tspan>의 모든 순서쌍</text>
+    <text x="145" y="325" font-size="66"><tspan font-style="italic">(a, b, c, d)</tspan>의 개수를 구하시오. [4점]</text>
+  </g>
+  <rect x="118" y="420" width="1526" height="365" fill="white" stroke="#000" stroke-width="4"/>
+  <g fill="#000" font-family="Georgia, 'Noto Serif KR', 'Apple SD Gothic Neo', serif" font-size="68">
+    <text x="185" y="565">(가)  <tspan font-style="italic">a + b + c + d</tspan> = 14</text>
+    <text x="185" y="705">(나)  10<tspan font-style="italic">a</tspan> ≥ <tspan font-style="italic">d</tspan>이고  <tspan font-style="italic">c</tspan> &lt; <tspan font-style="italic">d</tspan><tspan baseline-shift="super" font-size="42">2</tspan>이다.</text>
+  </g>
+</svg>
