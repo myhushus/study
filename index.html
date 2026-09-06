@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Study · Problem 01</title>
   <meta name="description" content="오답이면 더 쉬운 보조문제로 내려가고, 정답이면 상위 문제로 돌아가는 단계형 수학 학습">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/study-icon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Study">
   <style>
     :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--blue2:#eff6ff;--green:#15803d;--green2:#f0fdf4;--red:#b91c1c;--red2:#fef2f2;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;color-scheme:light}
     *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text)}button,input{font:inherit}a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
@@ -23,6 +29,7 @@
     <div class="brand">Study</div>
     <div class="toplinks">
       <a href="problem-002.html">다음 문제</a>
+      <a href="#" id="installLink" hidden>앱 설치</a>
       <a href="#" id="originalLink">원문 보기</a>
       <a href="#" id="resetLink">처음부터 다시</a>
     </div>
@@ -121,7 +128,28 @@ $('answerForm').addEventListener('submit',e=>{e.preventDefault();const n=nodes[c
 $('originalLink').addEventListener('click',e=>{e.preventDefault();go('root')});
 $('resetLink').addEventListener('click',e=>{e.preventDefault();reset()});
 function reset(){state.completed=[];state.solved=false;current='root';saveState();render()}
+
 const fromHash=location.hash.slice(1);if(nodes[fromHash])current=fromHash;render();
+
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}))}
+let deferredInstallPrompt=null;
+const installLink=$('installLink');
+const isStandalone=()=>window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;if(!isStandalone())installLink.hidden=false});
+window.addEventListener('appinstalled',()=>{deferredInstallPrompt=null;installLink.hidden=true});
+if(isIOS&&!isStandalone())installLink.hidden=false;
+installLink.addEventListener('click',async e=>{
+  e.preventDefault();
+  if(deferredInstallPrompt){
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt=null;
+    installLink.hidden=true;
+    return;
+  }
+  if(isIOS&&!isStandalone()) alert('Safari의 공유 버튼을 누른 뒤 “홈 화면에 추가”를 선택하세요.');
+});
 </script>
 </body>
 </html>
