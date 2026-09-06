@@ -1,10 +1,12 @@
-const CACHE_NAME='study-pwa-v1';
+const CACHE_NAME='study-pwa-v2';
 const CORE=[
   './',
   './index.html',
   './problem-002.html',
   './manifest.webmanifest',
   './icons/study-icon.svg',
+  './icons/study-icon-192.png',
+  './icons/study-icon-512.png',
   './problems/problem-001.png',
   './problems/problem-002.svg'
 ];
