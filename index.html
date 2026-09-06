@@ -22,6 +22,7 @@
   <div class="top">
     <div class="brand">Study</div>
     <div class="toplinks">
+      <a href="problem-002.html">다음 문제</a>
       <a href="#" id="originalLink">원래 문제 보기</a>
       <a href="#" id="resetLink">처음부터 다시</a>
     </div>
@@ -68,15 +69,12 @@ log₂ a + log₂ |2 - 27/n| - 2
 
 const nodes={
   root:{level:0,title:'14번 문제 — 로그와 n제곱근',meta:'Problem 01 · 원래 문제',text:originalText,help:'보기는 참고해도 좋지만 정답은 숫자로 직접 입력하세요.',parent:null,branch:null,answer:v=>num(v)===58},
-
   b1_1:{level:1,title:'도움 문제 1 · 짝수 제곱근과 부호',meta:'핵심 개념 1/3',text:'A의 2m제곱근 중 실수인 것의 개수가 1개 이하라고 하자. 이때 A는 0보다 크다, 0 이하이다 중 어느 쪽인가?',help:'“0 이하”, “A≤0”, “<=0”처럼 입력할 수 있습니다.',parent:'root',child:'b1_2',branch:1,answer:v=>isNonPositive(v)},
   b1_2:{level:2,title:'보조 문제 · 양수일 때',meta:'도움 문제 1의 보조 단계',text:'A > 0일 때 방정식 x^(2m) = A의 실수해는 몇 개인가?',help:'개수만 숫자로 입력하세요.',parent:'b1_1',child:'b1_3',branch:1,answer:v=>num(v)===2},
   b1_3:{level:3,title:'더 쉬운 보조 문제',meta:'도움 문제 1 · 최하위 단계',text:'방정식 x⁴ = 16의 실수해는 몇 개인가?',help:'실제 실수해를 떠올려 개수를 세어 보세요.',parent:'b1_2',child:null,branch:1,answer:v=>num(v)===2},
-
   b2_1:{level:1,title:'도움 문제 2 · 로그 부등식 정리',meta:'핵심 개념 2/3',text:'다음 부등식을 로그가 없는 형태로 끝까지 정리해 보세요.\n\nlog₂a + log₂|2 - 27/(2m)| - 2 ≤ 0',help:'공백과 × 기호의 차이는 무시합니다.',parent:'root',child:'b2_2',branch:2,answer:v=>normExpr(v)==='a|4m-27|<=8m'},
   b2_2:{level:2,title:'보조 문제 · 로그 부등식',meta:'도움 문제 2의 보조 단계',text:'log₂ X ≤ 2일 때, 양수 X의 범위는 X ≤ □ 이다. □에 들어갈 수를 구하세요.',help:'밑이 2인 로그는 증가함수입니다.',parent:'b2_1',child:'b2_3',branch:2,answer:v=>num(v)===4},
   b2_3:{level:3,title:'더 쉬운 보조 문제',meta:'도움 문제 2 · 최하위 단계',text:'log₂ 8의 값은 얼마인가?',help:'2를 몇 번 곱하면 8이 되는지 생각해 보세요.',parent:'b2_2',child:null,branch:2,answer:v=>num(v)===3},
-
   b3_1:{level:1,title:'도움 문제 3 · a의 범위',meta:'핵심 개념 3/3',text:'a|4m-27| ≤ 8m을 이용하자. 조건을 만족하는 자연수 m이 정확히 2개가 되도록 하는 자연수 a의 범위를 구하세요.',help:'“13≤a≤16”처럼 입력하세요.',parent:'root',child:'b3_2',branch:3,answer:v=>isRange13to16(v)},
   b3_2:{level:2,title:'보조 문제 · 경계값 찾기',meta:'도움 문제 3의 보조 단계',text:'m=6이 조건을 만족할 수 있는 a의 최댓값과, m=8이 조건을 만족하지 않게 하는 a의 최솟값을 차례로 구하세요.',help:'예: 20, 7 처럼 두 수를 쉼표로 입력하세요.',parent:'b3_1',child:'b3_3',branch:3,answer:v=>pair(v,16,13)},
   b3_3:{level:3,title:'더 쉬운 보조 문제',meta:'도움 문제 3 · 최하위 단계',text:'m=8을 대입하면 5a ≤ 64이다. 이 부등식을 만족하지 않는 가장 작은 자연수 a는 얼마인가?',help:'64÷5 = 12.8입니다.',parent:'b3_2',child:null,branch:3,answer:v=>num(v)===13}
@@ -84,7 +82,6 @@ const nodes={
 
 const state=loadState();
 let current=state.current||'root';
-
 function loadState(){try{return JSON.parse(localStorage.getItem('study-p001')||'{}')}catch{return {}}}
 function saveState(){localStorage.setItem('study-p001',JSON.stringify({current,completed:state.completed||[],solved:!!state.solved}))}
 function num(v){const s=String(v).trim().replace(/개/g,'').replace(/,/g,'');const n=Number(s);return Number.isFinite(n)?n:null}
@@ -97,44 +94,26 @@ function pair(v,a,b){const m=String(v).match(/-?\d+(?:\.\d+)?/g)||[];return Numb
 const $=id=>document.getElementById(id);
 function render(){
   const n=nodes[current];
-  $('meta').textContent=n.meta;
-  $('title').textContent=n.title;
-  $('problem').textContent=n.text;
-  $('helper').textContent=n.help||'';
-  $('imagebox').style.display=current==='root'?'block':'none';
-  $('answerInput').value='';
-  $('answerInput').placeholder=current==='root'?'정답 숫자를 입력하세요':'정답을 입력하세요';
-  $('feedback').className='feedback';$('feedback').textContent='';
-  $('actions').innerHTML='';
-  $('solution').className=state.solved?'solution show':'solution';
-  renderProgress();
-  history.replaceState(null,'',current==='root'?'#problem':'#'+current);
-  setTimeout(()=>$('answerInput').focus(),50);
+  $('meta').textContent=n.meta;$('title').textContent=n.title;$('problem').textContent=n.text;$('helper').textContent=n.help||'';
+  $('imagebox').style.display=current==='root'?'block':'none';$('answerInput').value='';$('answerInput').placeholder=current==='root'?'정답 숫자를 입력하세요':'정답을 입력하세요';
+  $('feedback').className='feedback';$('feedback').textContent='';$('actions').innerHTML='';$('solution').className=state.solved?'solution show':'solution';renderProgress();history.replaceState(null,'',current==='root'?'#problem':'#'+current);setTimeout(()=>$('answerInput').focus(),50);
 }
 function renderProgress(){
-  const done=new Set(state.completed||[]);const n=nodes[current];
-  const items=[['원문',0],['개념 1',1],['개념 2',2],['개념 3',3]];
-  $('progress').innerHTML=items.map(([label,b])=>{
-    const cls=(b===0&&current==='root')||(b&&n.branch===b)?'chip now':(b&&done.has(b)?'chip done':'chip');
-    return `<span class="${cls}">${label}${b&&done.has(b)?' ✓':''}</span>`;
-  }).join('');
+  const done=new Set(state.completed||[]);const n=nodes[current];const items=[['원문',0],['개념 1',1],['개념 2',2],['개념 3',3]];
+  $('progress').innerHTML=items.map(([label,b])=>{const cls=(b===0&&current==='root')||(b&&n.branch===b)?'chip now':(b&&done.has(b)?'chip done':'chip');return `<span class="${cls}">${label}${b&&done.has(b)?' ✓':''}</span>`;}).join('');
 }
 function nextBranch(){const done=new Set(state.completed||[]);for(const b of [1,2,3])if(!done.has(b))return `b${b}_1`;return 'b3_1'}
 function addButton(label,fn,kind='secondary'){const b=document.createElement('button');b.type='button';b.className='btn '+kind;b.textContent=label;b.onclick=fn;$('actions').appendChild(b)}
 function go(id){current=id;saveState();render()}
 function onCorrect(n){
   $('feedback').className='feedback good';
-  if(current==='root'){
-    state.solved=true;saveState();$('feedback').textContent='정답입니다. 이 문제를 완료했습니다.';$('solution').className='solution show';addButton('처음부터 다시',reset);return;
-  }
+  if(current==='root'){state.solved=true;saveState();$('feedback').textContent='정답입니다. 이 문제를 완료했습니다.';$('solution').className='solution show';addButton('처음부터 다시',reset);return;}
   if(n.level===1&&n.branch){state.completed=Array.from(new Set([...(state.completed||[]),n.branch])).sort()}
   saveState();$('feedback').textContent='정답입니다. 바로 한 단계 위 문제로 돌아갑니다.';addButton(n.parent==='root'?'원래 문제 재도전':'상위 문제로',()=>go(n.parent),'primary');
 }
 function onWrong(n){
   $('feedback').className='feedback bad';
-  if(current==='root'){
-    const dest=nextBranch();$('feedback').textContent='아직 정답이 아닙니다. 필요한 핵심 개념을 작은 문제로 먼저 풀어봅시다.';addButton('보조문제 풀기',()=>go(dest),'primary');return;
-  }
+  if(current==='root'){const dest=nextBranch();$('feedback').textContent='아직 정답이 아닙니다. 필요한 핵심 개념을 작은 문제로 먼저 풀어봅시다.';addButton('보조문제 풀기',()=>go(dest),'primary');return;}
   if(n.child){$('feedback').textContent='아직 정답이 아닙니다. 한 단계 더 쉬운 보조문제로 내려갑니다.';addButton('더 쉬운 문제 풀기',()=>go(n.child),'primary')}
   else{$('feedback').textContent='아직 정답이 아닙니다. 이 단계의 핵심을 다시 생각해 보고 재도전해 보세요.';addButton('다시 풀기',()=>{ $('answerInput').value='';$('answerInput').focus();$('feedback').className='feedback';$('actions').innerHTML='';},'primary')}
 }
@@ -142,7 +121,6 @@ $('answerForm').addEventListener('submit',e=>{e.preventDefault();const n=nodes[c
 $('originalLink').addEventListener('click',e=>{e.preventDefault();go('root')});
 $('resetLink').addEventListener('click',e=>{e.preventDefault();reset()});
 function reset(){state.completed=[];state.solved=false;current='root';saveState();render()}
-
 const fromHash=location.hash.slice(1);if(nodes[fromHash])current=fromHash;render();
 </script>
 </body>
