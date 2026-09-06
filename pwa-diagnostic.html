@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Study · PWA 진단</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#2563eb">
+  <style>
+    :root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;color:#111827;background:#f6f7fb}
+    *{box-sizing:border-box}body{margin:0;padding:20px}main{max-width:720px;margin:auto}.card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:20px;box-shadow:0 8px 24px rgba(17,24,39,.06)}h1{font-size:24px;margin:0 0 8px}.muted{color:#6b7280;font-size:14px;line-height:1.6}.row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #eef0f3}.row:last-child{border-bottom:0}.ok{color:#15803d;font-weight:700}.bad{color:#b91c1c;font-weight:700}.wait{color:#92400e;font-weight:700}button{margin-top:18px;width:100%;border:0;border-radius:12px;padding:14px;background:#2563eb;color:#fff;font-weight:700;font-size:16px}.detail{margin-top:18px;padding:14px;border-radius:12px;background:#f8fafc;white-space:pre-wrap;font-size:13px;line-height:1.6;overflow-wrap:anywhere}a{color:#2563eb;text-decoration:none}.top{margin-bottom:14px}
+  </style>
+</head>
+<body><main>
+  <div class="top"><a href="index.html">← Study로 돌아가기</a></div>
+  <section class="card">
+    <h1>PWA 설치 진단</h1>
+    <p class="muted">Android Chrome이 Study를 설치 가능한 앱으로 인식하는지 확인합니다.</p>
+    <div id="rows"></div>
+    <button id="installBtn">설치 프롬프트 테스트</button>
+    <div class="detail" id="detail">진단 중…</div>
+  </section>
+</main>
+<script>
+const rows=document.getElementById('rows');
+const detail=document.getElementById('detail');
+const installBtn=document.getElementById('installBtn');
+let deferredPrompt=null;
+let promptSeen=false;
+function add(label,value,state){const r=document.createElement('div');r.className='row';r.innerHTML=`<span>${label}</span><span class="${state}">${value}</span>`;rows.appendChild(r)}
+function yesno(v){return v?['정상','ok']:['실패','bad']}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;promptSeen=true;render()});
+window.addEventListener('appinstalled',()=>{detail.textContent='설치 완료 이벤트가 감지되었습니다.'});
+async function render(){
+  rows.innerHTML='';
+  const secure=window.isSecureContext;
+  add('HTTPS / 보안 컨텍스트',...yesno(secure));
+  const swSupported='serviceWorker' in navigator;
+  add('Service Worker 지원',...yesno(swSupported));
+  let swRegistered=false,swControlled=!!navigator.serviceWorker?.controller,swError='';
+  if(swSupported){try{const reg=await navigator.serviceWorker.register('./service-worker.js');await navigator.serviceWorker.ready;swRegistered=!!reg}catch(e){swError=String(e)}}
+  add('Service Worker 등록',...yesno(swRegistered));
+  add('현재 페이지 SW 제어',swControlled?'정상':'아직 아님',swControlled?'ok':'wait');
+  let manifestOk=false,manifestInfo='',icon192=false,icon512=false;
+  try{const mres=await fetch('./manifest.webmanifest',{cache:'no-store'});const m=await mres.json();manifestOk=mres.ok&&!!m.name&&!!m.start_url&&!!m.display;manifestInfo=JSON.stringify(m,null,2)}catch(e){manifestInfo=String(e)}
+  add('Manifest 로드',...yesno(manifestOk));
+  try{const r=await fetch('./icons/study-icon-192.png',{cache:'no-store'});icon192=r.ok}catch(e){}
+  try{const r=await fetch('./icons/study-icon-512.png',{cache:'no-store'});icon512=r.ok}catch(e){}
+  add('192×192 PNG 아이콘',...yesno(icon192));
+  add('512×512 PNG 아이콘',...yesno(icon512));
+  const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+  add('Standalone 실행',standalone?'예':'아니오',standalone?'ok':'wait');
+  add('beforeinstallprompt',promptSeen?'발생함':'발생 안 함',promptSeen?'ok':'bad');
+  detail.textContent=`주소: ${location.href}\nUA: ${navigator.userAgent}\n\nService Worker 오류: ${swError||'없음'}\n\nManifest:\n${manifestInfo}`;
+}
+installBtn.addEventListener('click',async()=>{
+  if(deferredPrompt){deferredPrompt.prompt();const result=await deferredPrompt.userChoice;detail.textContent='설치 선택 결과: '+result.outcome;deferredPrompt=null;return}
+  detail.textContent='beforeinstallprompt가 발생하지 않았습니다. 위 진단 결과 화면을 캡처해서 보내주세요.';
+});
+render();
+setTimeout(render,1500);
+</script></body></html>
