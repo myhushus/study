@@ -29,7 +29,7 @@
     <div class="brand">Study</div>
     <div class="toplinks">
       <a href="problem-002.html">다음 문제</a>
-      <a href="#" id="installLink" hidden>앱 설치</a>
+      <a href="#" id="installLink">앱 설치</a>
       <a href="#" id="originalLink">원문 보기</a>
       <a href="#" id="resetLink">처음부터 다시</a>
     </div>
@@ -73,7 +73,6 @@ log₂ a + log₂ |2 - 27/n| - 2
 의 n제곱근 중 실수인 것의 개수를 f(n)이라 하자. f(2m) ≤ 1을 만족시키는 자연수 m의 개수가 2가 되도록 하는 모든 자연수 a의 값의 합은? [4점]
 
 ① 50   ② 54   ③ 58   ④ 62   ⑤ 66`;
-
 const nodes={
   root:{level:0,title:'14번 문제 — 로그와 n제곱근',meta:'Problem 01 · 원문',text:originalText,help:'보기는 참고해도 좋지만 정답은 숫자로 직접 입력하세요.',parent:null,branch:null,answer:v=>num(v)===58},
   b1_1:{level:1,title:'도움 문제 1 · 짝수 제곱근과 부호',meta:'핵심 개념 1/3',text:'A의 2m제곱근 중 실수인 것의 개수가 1개 이하라고 하자. 이때 A는 0보다 크다, 0 이하이다 중 어느 쪽인가?',help:'“0 이하”, “A≤0”, “<=0”처럼 입력할 수 있습니다.',parent:'root',child:'b1_2',branch:1,answer:v=>isNonPositive(v)},
@@ -86,9 +85,7 @@ const nodes={
   b3_2:{level:2,title:'보조 문제 · 경계값 찾기',meta:'도움 문제 3의 보조 단계',text:'m=6이 조건을 만족할 수 있는 a의 최댓값과, m=8이 조건을 만족하지 않게 하는 a의 최솟값을 차례로 구하세요.',help:'예: 20, 7 처럼 두 수를 쉼표로 입력하세요.',parent:'b3_1',child:'b3_3',branch:3,answer:v=>pair(v,16,13)},
   b3_3:{level:3,title:'더 쉬운 보조 문제',meta:'도움 문제 3 · 최하위 단계',text:'m=8을 대입하면 5a ≤ 64이다. 이 부등식을 만족하지 않는 가장 작은 자연수 a는 얼마인가?',help:'64÷5 = 12.8입니다.',parent:'b3_2',child:null,branch:3,answer:v=>num(v)===13}
 };
-
-const state=loadState();
-let current=state.current||'root';
+const state=loadState();let current=state.current||'root';
 function loadState(){try{return JSON.parse(localStorage.getItem('study-p001')||'{}')}catch{return {}}}
 function saveState(){localStorage.setItem('study-p001',JSON.stringify({current,completed:state.completed||[],solved:!!state.solved}))}
 function num(v){const s=String(v).trim().replace(/개/g,'').replace(/,/g,'');const n=Number(s);return Number.isFinite(n)?n:null}
@@ -97,59 +94,20 @@ function isNonPositive(v){const s=compact(v).replace(/^a/,'');return ['<=0','0�
 function normExpr(v){return compact(v).replace(/\*/g,'').replace(/\|27-4m\|/g,'|4m-27|')}
 function isRange13to16(v){let s=compact(v).replace(/a/g,'');return s.includes('13<=')&&s.includes('<=16')||s==='13~16'||s==='13-16'}
 function pair(v,a,b){const m=String(v).match(/-?\d+(?:\.\d+)?/g)||[];return Number(m[0])===a&&Number(m[1])===b}
-
 const $=id=>document.getElementById(id);
-function render(){
-  const n=nodes[current];
-  $('meta').textContent=n.meta;$('title').textContent=n.title;$('problem').textContent=n.text;$('helper').textContent=n.help||'';
-  $('imagebox').style.display=current==='root'?'block':'none';$('originalLink').style.display=current==='root'?'none':'';$('answerInput').value='';$('answerInput').placeholder=current==='root'?'정답 숫자를 입력하세요':'정답을 입력하세요';
-  $('feedback').className='feedback';$('feedback').textContent='';$('actions').innerHTML='';$('solution').className=state.solved?'solution show':'solution';renderProgress();history.replaceState(null,'',current==='root'?'#problem':'#'+current);setTimeout(()=>$('answerInput').focus(),50);
-}
-function renderProgress(){
-  const done=new Set(state.completed||[]);const n=nodes[current];const items=[['원문',0],['개념 1',1],['개념 2',2],['개념 3',3]];
-  $('progress').innerHTML=items.map(([label,b])=>{const cls=(b===0&&current==='root')||(b&&n.branch===b)?'chip now':(b&&done.has(b)?'chip done':'chip');return `<span class="${cls}">${label}${b&&done.has(b)?' ✓':''}</span>`;}).join('');
-}
+function render(){const n=nodes[current];$('meta').textContent=n.meta;$('title').textContent=n.title;$('problem').textContent=n.text;$('helper').textContent=n.help||'';$('imagebox').style.display=current==='root'?'block':'none';$('originalLink').style.display=current==='root'?'none':'';$('answerInput').value='';$('answerInput').placeholder=current==='root'?'정답 숫자를 입력하세요':'정답을 입력하세요';$('feedback').className='feedback';$('feedback').textContent='';$('actions').innerHTML='';$('solution').className=state.solved?'solution show':'solution';renderProgress();history.replaceState(null,'',current==='root'?'#problem':'#'+current);setTimeout(()=>$('answerInput').focus(),50)}
+function renderProgress(){const done=new Set(state.completed||[]),n=nodes[current],items=[['원문',0],['개념 1',1],['개념 2',2],['개념 3',3]];$('progress').innerHTML=items.map(([label,b])=>{const cls=(b===0&&current==='root')||(b&&n.branch===b)?'chip now':(b&&done.has(b)?'chip done':'chip');return `<span class="${cls}">${label}${b&&done.has(b)?' ✓':''}</span>`}).join('')}
 function nextBranch(){const done=new Set(state.completed||[]);for(const b of [1,2,3])if(!done.has(b))return `b${b}_1`;return 'b3_1'}
 function addButton(label,fn,kind='secondary'){const b=document.createElement('button');b.type='button';b.className='btn '+kind;b.textContent=label;b.onclick=fn;$('actions').appendChild(b)}
 function go(id){current=id;saveState();render()}
-function onCorrect(n){
-  $('feedback').className='feedback good';
-  if(current==='root'){state.solved=true;saveState();$('feedback').textContent='정답입니다. 이 문제를 완료했습니다.';$('solution').className='solution show';addButton('처음부터 다시',reset);return;}
-  if(n.level===1&&n.branch){state.completed=Array.from(new Set([...(state.completed||[]),n.branch])).sort()}
-  saveState();$('feedback').textContent='정답입니다. 바로 한 단계 위 문제로 돌아갑니다.';addButton(n.parent==='root'?'원문 재도전':'상위 문제로',()=>go(n.parent),'primary');
-}
-function onWrong(n){
-  $('feedback').className='feedback bad';
-  if(current==='root'){const dest=nextBranch();$('feedback').textContent='아직 정답이 아닙니다. 필요한 핵심 개념을 작은 문제로 먼저 풀어봅시다.';addButton('보조문제 풀기',()=>go(dest),'primary');return;}
-  if(n.child){$('feedback').textContent='아직 정답이 아닙니다. 한 단계 더 쉬운 보조문제로 내려갑니다.';addButton('더 쉬운 문제 풀기',()=>go(n.child),'primary')}
-  else{$('feedback').textContent='아직 정답이 아닙니다. 이 단계의 핵심을 다시 생각해 보고 재도전해 보세요.';addButton('다시 풀기',()=>{ $('answerInput').value='';$('answerInput').focus();$('feedback').className='feedback';$('actions').innerHTML='';},'primary')}
-}
-$('answerForm').addEventListener('submit',e=>{e.preventDefault();const n=nodes[current];const v=$('answerInput').value;if(!v.trim())return;n.answer(v)?onCorrect(n):onWrong(n)});
-$('originalLink').addEventListener('click',e=>{e.preventDefault();go('root')});
-$('resetLink').addEventListener('click',e=>{e.preventDefault();reset()});
-function reset(){state.completed=[];state.solved=false;current='root';saveState();render()}
-
-const fromHash=location.hash.slice(1);if(nodes[fromHash])current=fromHash;render();
-
+function onCorrect(n){$('feedback').className='feedback good';if(current==='root'){state.solved=true;saveState();$('feedback').textContent='정답입니다. 이 문제를 완료했습니다.';$('solution').className='solution show';addButton('처음부터 다시',reset);return}if(n.level===1&&n.branch)state.completed=Array.from(new Set([...(state.completed||[]),n.branch])).sort();saveState();$('feedback').textContent='정답입니다. 바로 한 단계 위 문제로 돌아갑니다.';addButton(n.parent==='root'?'원문 재도전':'상위 문제로',()=>go(n.parent),'primary')}
+function onWrong(n){$('feedback').className='feedback bad';if(current==='root'){const dest=nextBranch();$('feedback').textContent='아직 정답이 아닙니다. 필요한 핵심 개념을 작은 문제로 먼저 풀어봅시다.';addButton('보조문제 풀기',()=>go(dest),'primary');return}if(n.child){$('feedback').textContent='아직 정답이 아닙니다. 한 단계 더 쉬운 보조문제로 내려갑니다.';addButton('더 쉬운 문제 풀기',()=>go(n.child),'primary')}else{$('feedback').textContent='아직 정답이 아닙니다. 이 단계의 핵심을 다시 생각해 보고 재도전해 보세요.';addButton('다시 풀기',()=>{$('answerInput').value='';$('answerInput').focus();$('feedback').className='feedback';$('actions').innerHTML=''},'primary')}}
+$('answerForm').addEventListener('submit',e=>{e.preventDefault();const n=nodes[current],v=$('answerInput').value;if(!v.trim())return;n.answer(v)?onCorrect(n):onWrong(n)});
+$('originalLink').addEventListener('click',e=>{e.preventDefault();go('root')});$('resetLink').addEventListener('click',e=>{e.preventDefault();reset()});function reset(){state.completed=[];state.solved=false;current='root';saveState();render()}const fromHash=location.hash.slice(1);if(nodes[fromHash])current=fromHash;render();
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}))}
-let deferredInstallPrompt=null;
-const installLink=$('installLink');
-const isStandalone=()=>window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
-const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;if(!isStandalone())installLink.hidden=false});
-window.addEventListener('appinstalled',()=>{deferredInstallPrompt=null;installLink.hidden=true});
-if(isIOS&&!isStandalone())installLink.hidden=false;
-installLink.addEventListener('click',async e=>{
-  e.preventDefault();
-  if(deferredInstallPrompt){
-    deferredInstallPrompt.prompt();
-    await deferredInstallPrompt.userChoice;
-    deferredInstallPrompt=null;
-    installLink.hidden=true;
-    return;
-  }
-  if(isIOS&&!isStandalone()) alert('Safari의 공유 버튼을 누른 뒤 “홈 화면에 추가”를 선택하세요.');
-});
+let deferredInstallPrompt=null;const installLink=$('installLink');const isStandalone=()=>window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e});
+installLink.addEventListener('click',async e=>{e.preventDefault();if(isStandalone()){alert('이미 앱으로 설치되어 있습니다.');return}if(deferredInstallPrompt){deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;return}if(isIOS){alert('Safari의 공유 버튼을 누른 뒤 “홈 화면에 추가”를 선택하세요.');return}alert('브라우저 메뉴에서 “앱 설치” 또는 “홈 화면에 추가”를 선택하세요.');});
 </script>
 </body>
 </html>
