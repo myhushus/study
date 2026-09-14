@@ -1,16 +1,18 @@
-const CACHE_NAME='study-pwa-v4';
+const CACHE_NAME='study-pwa-v5';
 const CORE=[
   './',
   './index.html',
   './problem-002.html',
   './problem-003.html',
+  './problem-004.html',
   './manifest.webmanifest',
   './icons/study-icon.svg',
   './icons/study-icon-192.png',
   './icons/study-icon-512.png',
   './problems/problem-001.png',
   './problems/problem-002.svg',
-  './problems/problem-003.svg'
+  './problems/problem-003.svg',
+  './problems/problem-004.png'
 ];
 
 self.addEventListener('install',event=>{
