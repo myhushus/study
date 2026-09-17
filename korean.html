@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Study · 국어 · 시</title>
+  <meta name="description" content="문제를 풀면서 시를 이해하고 수능형 문제로 확장하는 국어 학습">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/study-icon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#2563eb">
+  <style>
+    :root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--blue2:#eff6ff;--green:#15803d;--green2:#f0fdf4;--red:#b91c1c;--red2:#fef2f2;--amber:#92400e;--amber2:#fffbeb;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;color-scheme:light}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text)}button{font:inherit}a{color:inherit;text-decoration:none}main{max-width:920px;margin:auto;padding:28px 18px 72px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:20px}.subjects{display:flex;gap:8px}.subject{padding:9px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;font-weight:800;font-size:14px}.subject.active{background:var(--blue);border-color:var(--blue);color:#fff}.toplinks{display:flex;gap:14px;color:var(--muted);font-size:14px}
+    .hero{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 10px 30px rgba(17,24,39,.06);margin-bottom:18px}.eyebrow{font-size:13px;color:var(--blue);font-weight:800;margin-bottom:7px}.hero h1{font-size:29px;margin:0 0 8px}.hero p{margin:0;color:var(--muted);line-height:1.65}.badge{display:inline-flex;margin-top:14px;padding:7px 10px;border-radius:999px;background:var(--amber2);border:1px solid #fde68a;color:var(--amber);font-size:12px;font-weight:800}
+    .layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.8fr);gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 8px 24px rgba(17,24,39,.04)}.card h2{font-size:20px;margin:0 0 14px}.poem{white-space:pre-wrap;line-height:1.95;font-family:Georgia,"Noto Serif KR",serif;font-size:17px;padding:18px;border-radius:15px;background:#fcfcfd;border:1px solid var(--line)}.source{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}
+    .stagebar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}.chip{padding:6px 9px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--muted);background:#fff}.chip.now{border-color:#bfdbfe;background:var(--blue2);color:var(--blue);font-weight:800}.chip.done{border-color:#bbf7d0;background:var(--green2);color:var(--green)}
+    .qtitle{font-size:18px;font-weight:800;line-height:1.55;margin:0 0 10px}.qhelp{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:13px}.choices{display:grid;gap:9px}.choice{width:100%;text-align:left;border:1px solid #d1d5db;background:#fff;border-radius:13px;padding:12px 13px;cursor:pointer;line-height:1.45}.choice:hover{border-color:#93c5fd;background:#f8fbff}.choice.correct{border-color:#86efac;background:var(--green2);color:#166534}.choice.wrong{border-color:#fecaca;background:var(--red2);color:#991b1b}.feedback{display:none;margin-top:13px;padding:12px 13px;border-radius:13px;line-height:1.6}.feedback.show{display:block}.feedback.good{background:var(--green2);border:1px solid #bbf7d0;color:#166534}.feedback.bad{background:var(--red2);border:1px solid #fecaca;color:#991b1b}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.btn{border:0;border-radius:12px;padding:11px 14px;font-weight:800;cursor:pointer}.btn.primary{background:var(--blue);color:#fff}.btn.secondary{background:#f3f4f6;color:#111827}.summary{display:none;margin-top:16px;background:#fcfcfd;border:1px solid var(--line);border-radius:15px;padding:16px;line-height:1.7}.summary.show{display:block}.summary dl{margin:0}.summary dt{font-weight:800;margin-top:8px}.summary dd{margin:2px 0 0;color:#374151}
+    .footer{margin-top:22px;color:var(--muted);font-size:12px;text-align:center;line-height:1.55}
+    @media(max-width:760px){main{padding:18px 12px 54px}.top{align-items:flex-start;flex-direction:column}.toplinks{width:100%;justify-content:flex-end}.layout{grid-template-columns:1fr}.hero h1{font-size:24px}.card{padding:16px}.poem{font-size:16px}}
+  </style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <nav class="subjects" aria-label="과목 선택">
+      <a class="subject" href="index.html">수학</a>
+      <a class="subject active" href="korean.html" aria-current="page">국어</a>
+    </nav>
+    <div class="toplinks"><a href="#poem">작품</a><a href="#learn">문제</a><a href="#" id="resetLink">처음부터</a></div>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">2027 EBS 수능특강 · 문학 · 개념학습 1강</div>
+    <h1>김소월 〈길〉</h1>
+    <p>정답을 외우는 대신, 작은 질문을 순서대로 풀면서 화자의 상황과 정서, 핵심 시어, 주제를 스스로 찾아가도록 구성했습니다.</p>
+    <span class="badge">학습 우선순위 · 일반 학습</span>
+  </section>
+
+  <div class="layout">
+    <section class="card" id="poem">
+      <h2>작품</h2>
+      <div class="poem">어제도 하로밤
+나그네 집에
+가마귀 가왁가왁 울며 새었소.
+
+오늘은
+또 몇 십 리(十里)
+어디로 갈까.
+
+산으로 올라갈까
+들로 갈까
+오라는 곳이 없어 나는 못 가오.
+
+말 마소, 내 집도
+정주 곽산(定州郭山)
+차 가고 배 가는 곳이라오.
+
+여보소, 공중에
+저 기러기
+공중엔 길 있어서 잘 가는가?
+
+여보소, 공중에
+저 기러기
+열십자 복판에 내가 섰소.
+
+갈래갈래 갈린 길
+길이라도
+내게 바이 갈 길은 하나 없소.</div>
+      <div class="source">김소월, 〈길〉. 김소월(1902–1934)의 작품. 작품 전문은 국립국어원 공개 자료에 수록된 표기를 기준으로 학습용으로 정리했습니다. ‘바이’는 ‘아주, 전혀’의 뜻입니다.</div>
+    </section>
+
+    <section class="card" id="learn">
+      <h2 id="modeTitle">1단계 · 이해 유도 문제</h2>
+      <div class="stagebar" id="stagebar"></div>
+      <div class="qtitle" id="qtitle"></div>
+      <div class="qhelp" id="qhelp"></div>
+      <div class="choices" id="choices"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="actions" id="actions"></div>
+      <div class="summary" id="summary"></div>
+    </section>
+  </div>
+
+  <div class="footer">이해 유도 문제를 끝내면 핵심 정리가 열리고, 이어서 일반 문제와 수능형 문제로 넘어갑니다.</div>
+</main>
+
+<script>
+const i18n={
+  guided:'1단계 · 이해 유도 문제',summary:'2단계 · 핵심 정리',general:'3단계 · 일반 문제',exam:'4단계 · 수능형 예상문제',
+  next:'다음 문제',toSummary:'핵심 정리 보기',toGeneral:'일반 문제로',toExam:'수능형 문제로',restart:'처음부터',correct:'맞았습니다.',wrong:'다시 생각해 보세요.'
+};
+const guided=[
+  {q:'첫 연에서 화자는 어디에서 밤을 보냈나요?',h:'장소를 나타내는 표현을 그대로 찾아보세요.',c:['자기 집','나그네 집','정주 곽산의 역','산속'],a:1,e:'화자는 “나그네 집”에서 밤을 보냈습니다. 처음부터 정착하지 못하고 떠도는 처지가 드러납니다.'},
+  {q:'“오늘은 또 몇 십 리 어디로 갈까”에서 가장 직접적으로 드러나는 화자의 상태는?',h:'‘또’와 ‘어디로 갈까’를 함께 보세요.',c:['목적지가 분명하다','여행을 즐기고 있다','갈 곳을 정하지 못한 채 떠돌고 있다','고향으로 돌아가기로 결심했다'],a:2,e:'‘또’는 방황이 반복되고 있음을, ‘어디로 갈까’는 목적지가 정해지지 않았음을 보여 줍니다.'},
+  {q:'“오라는 곳이 없어 나는 못 가오”가 화자의 정서를 가장 강하게 만드는 까닭은?',h:'길이 없는 것과 ‘갈 곳이 없는 것’은 다릅니다.',c:['길의 지리를 몰라서','누군가 자신을 기다리는 곳이 없어서','몸이 아파 걸을 수 없어서','배가 끊겨서'],a:1,e:'물리적인 길의 문제가 아니라 자신을 받아 줄 곳이 없다는 데서 고독과 소외감이 생깁니다.'},
+  {q:'화자에게 고향 “정주 곽산”이 있는데도 현재 고향으로 가지 못한다는 사실은 무엇을 강조할까요?',h:'‘집이 있음’과 ‘갈 수 없음’의 대비를 생각해 보세요.',c:['고향에 대한 무관심','정착할 곳을 잃은 처지','새로운 도시 생활에 대한 기대','교통의 불편함'],a:1,e:'고향이 존재하지만 그곳조차 현실적인 안식처가 되지 못한다는 점이 방황과 상실감을 심화합니다.'},
+  {q:'화자가 공중의 “기러기”를 바라보는 이유로 가장 적절한 것은?',h:'기러기는 움직이고 있고, 화자는 갈림길에 멈춰 있습니다.',c:['기러기를 사냥하려고','기러기에게 길을 묻고 자신의 처지와 대비하려고','날씨를 예측하려고','고향에 편지를 보내려고'],a:1,e:'기러기는 공중에서 갈 길을 아는 듯 이동합니다. 화자는 그 모습을 보며 갈 길을 찾지 못하는 자신의 처지를 더 선명하게 인식합니다.'},
+  {q:'마지막의 “갈래갈래 갈린 길 / 길이라도 / 내게 바이 갈 길은 하나 없소”가 뜻하는 바는?',h:'길은 많지만 화자가 갈 수 있는 길은 없다고 합니다.',c:['선택지가 많아 즐겁다','실제로 도로가 막혀 있다','삶의 방향과 머물 곳을 찾지 못한 막막함','여행 경로를 아직 검색하지 않았다'],a:2,e:'‘길’은 실제 길이면서 삶의 방향을 상징합니다. 수많은 길 가운데 자신의 길이 없다는 역설이 화자의 막막함을 집약합니다.'},
+  {q:'지금까지의 답을 종합할 때 이 시의 중심 정서로 가장 적절한 것은?',h:'떠돎, 오라는 곳 없음, 갈 길 없음이 반복됩니다.',c:['환희와 자신감','고독과 막막함','분노와 복수심','풍요로움에 대한 만족'],a:1,e:'방황하는 상황과 정착할 곳이 없는 처지가 반복되며 고독과 막막함이 중심 정서를 이룹니다.'}
+];
+const general=[
+  {q:'이 작품의 표현상 특징으로 적절하지 않은 것은?',c:['의문형 표현을 사용해 화자의 방황을 드러낸다.','‘길’을 반복하여 핵심 상황을 강조한다.','기러기와 화자의 처지를 대비한다.','미래의 성공을 단정하는 단호한 어조가 중심이다.'],a:3,e:'작품은 확신이나 성공 의지를 단정하기보다 갈 곳을 찾지 못하는 불안과 막막함을 드러냅니다.'},
+  {q:'“열십자 복판”의 기능으로 가장 적절한 것은?',c:['화자가 선택의 중심에 있지만 어느 길도 택하지 못하는 상황을 시각화한다.','고향의 번화함을 예찬한다.','교통수단의 발달을 설명한다.','화자가 기러기와 만나는 실제 장소만을 객관적으로 기록한다.'],a:0,e:'여러 방향으로 길이 갈리는 한복판에 서 있지만 갈 길이 없다는 상황이 화자의 내적 막막함을 구체화합니다.'},
+  {q:'“가마귀”와 “기러기”를 통해 공통적으로 강화되는 것은?',c:['화자의 부유하고 안정된 생활','자연을 지배하려는 태도','화자의 외롭고 떠도는 처지','계절 변화에 대한 과학적 관심'],a:2,e:'주변의 새 이미지는 떠돌거나 이동하는 화자의 처지와 연결되며 고독을 부각합니다.'}
+];
+const exam=[
+  {q:'〈보기〉: 문학 작품에서 공간은 인물이나 화자의 내면을 구체화하는 장치가 될 수 있다. 이를 바탕으로 〈길〉을 감상한 내용으로 가장 적절한 것은?',c:['‘나그네 집’은 화자의 안정된 정착 생활을 보여 준다.','‘정주 곽산’은 현재 화자가 편안히 머무는 공간이다.','‘열십자 복판’은 여러 가능성 앞에서도 자신의 길을 찾지 못하는 내면을 드러낸다.','‘공중’은 화자가 이미 도달한 자유로운 세계를 뜻한다.'],a:2,e:'‘열십자 복판’은 길이 여러 갈래로 나뉜 공간이지만 화자에게는 갈 길이 없다는 점에서 내적 방황을 공간적으로 형상화합니다.'},
+  {q:'다음 중 “기러기”에 대한 이해로 가장 적절한 것은?',c:['화자와 마찬가지로 갈 길을 완전히 잃은 존재로만 제시된다.','화자가 자신의 처지를 비추어 보는 대비적 대상으로 기능한다.','화자에게 고향으로 돌아갈 교통편을 알려 주는 현실적 조력자이다.','화자가 두려워하여 피하려는 위협적 대상이다.'],a:1,e:'기러기는 공중에서 길을 따라가는 듯한 존재이고, 화자는 갈림길에서 갈 곳을 찾지 못합니다. 이 대비가 화자의 처지를 부각합니다.'},
+  {q:'이 작품의 ‘길’에 대한 설명으로 가장 적절한 것은?',c:['전적으로 실제 도로만을 뜻한다.','현실의 이동 경로이면서 동시에 화자가 찾지 못한 삶의 방향을 상징한다.','화자가 이미 결정한 미래 계획을 상징한다.','고향으로 돌아가는 유일한 경로를 뜻한다.'],a:1,e:'실제 이동 공간인 길이 반복되면서 화자가 찾지 못한 삶의 방향이라는 상징적 의미까지 획득합니다.'}
+];
+let state=load();
+function load(){try{return JSON.parse(localStorage.getItem('study-korean-gil')||'null')||{mode:'guided',index:0,done:{guided:false,general:false,exam:false}}}catch{return {mode:'guided',index:0,done:{guided:false,general:false,exam:false}}}}
+function save(){localStorage.setItem('study-korean-gil',JSON.stringify(state))}
+const $=id=>document.getElementById(id);
+function questions(){return state.mode==='guided'?guided:state.mode==='general'?general:exam}
+function labelFor(mode){return mode==='guided'?i18n.guided:mode==='summary'?i18n.summary:mode==='general'?i18n.general:i18n.exam}
+function renderBar(){const items=[['guided','이해'],['summary','정리'],['general','일반'],['exam','수능형']];$('stagebar').innerHTML=items.map(([k,l])=>`<span class="chip ${state.mode===k?'now':state.done[k]?'done':''}">${l}${state.done[k]?' ✓':''}</span>`).join('')}
+function render(){renderBar();$('modeTitle').textContent=labelFor(state.mode);$('feedback').className='feedback';$('feedback').textContent='';$('actions').innerHTML='';$('summary').className='summary';if(state.mode==='summary'){renderSummary();return}const qs=questions(),q=qs[Math.min(state.index,qs.length-1)];$('qtitle').textContent=`${state.index+1}. ${q.q}`;$('qhelp').textContent=q.h||'';$('choices').innerHTML=q.c.map((x,i)=>`<button class="choice" type="button" data-i="${i}">${i+1}. ${x}</button>`).join('');document.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>answer(Number(b.dataset.i))))}
+function answer(i){const qs=questions(),q=qs[state.index];document.querySelectorAll('.choice').forEach((b,j)=>{b.disabled=true;if(j===q.a)b.classList.add('correct');else if(j===i)b.classList.add('wrong')});const ok=i===q.a;$('feedback').className='feedback show '+(ok?'good':'bad');$('feedback').textContent=(ok?i18n.correct+' ':i18n.wrong+' ')+q.e;$('actions').innerHTML='';const btn=document.createElement('button');btn.className='btn primary';btn.type='button';btn.textContent=state.index<qs.length-1?i18n.next:(state.mode==='guided'?i18n.toSummary:state.mode==='general'?i18n.toExam:i18n.restart);btn.onclick=advance;$('actions').appendChild(btn)}
+function advance(){const qs=questions();if(state.index<qs.length-1){state.index++;save();render();return}state.done[state.mode]=true;if(state.mode==='guided'){state.mode='summary';state.index=0}else if(state.mode==='general'){state.mode='exam';state.index=0}else{reset();return}save();render()}
+function renderSummary(){$('qtitle').textContent='문제를 풀며 발견한 내용을 한 번에 연결해 봅시다.';$('qhelp').textContent='다음 문제를 풀 때 이 정리를 외우기보다, 방금 답한 질문의 흐름을 떠올리는 것이 목표입니다.';$('choices').innerHTML='';$('summary').className='summary show';$('summary').innerHTML=`<dl><dt>화자의 상황</dt><dd>정착할 곳 없이 계속 길을 떠돌며, 고향이 있어도 그곳으로 돌아가지 못하고 갈림길에 서 있다.</dd><dt>중심 정서</dt><dd>고독, 소외감, 막막함.</dd><dt>핵심 시어</dt><dd>‘길’은 실제 이동 경로이면서 삶의 방향을, ‘기러기’는 화자의 처지를 비추는 대비적 대상을 나타낸다.</dd><dt>표현</dt><dd>의문형 표현, 반복, 공간의 대비를 통해 방황과 고독을 구체화한다.</dd><dt>주제</dt><dd>정착할 곳과 삶의 방향을 잃고 떠도는 존재의 고독과 비애.</dd></dl>`;const b=document.createElement('button');b.type='button';b.className='btn primary';b.textContent=i18n.toGeneral;b.onclick=()=>{state.done.summary=true;state.mode='general';state.index=0;save();render()};$('actions').appendChild(b)}
+function reset(){state={mode:'guided',index:0,done:{guided:false,general:false,exam:false}};save();render()}
+$('resetLink').addEventListener('click',e=>{e.preventDefault();reset()});render();
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}))}
+</script>
+</body>
+</html>
