@@ -1,4 +1,4 @@
-const CACHE_NAME='study-pwa-v11';
+const CACHE_NAME='study-pwa-v12';
 const CORE=[
   './',
   './index.html',
@@ -6,6 +6,11 @@ const CORE=[
   './problem-003.html',
   './problem-004.html',
   './korean.html',
+  './korean-spring.html',
+  './poetry-nav.js',
+  './poetry-lesson.js',
+  './poetry-lesson.css',
+  './lessons/spring.js',
   './subject-nav.js',
   './korean-advanced.js',
   './manifest.webmanifest',
