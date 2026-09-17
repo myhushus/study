@@ -1,4 +1,4 @@
-const CACHE_NAME='study-pwa-v8';
+const CACHE_NAME='study-pwa-v9';
 const CORE=[
   './',
   './index.html',
@@ -7,6 +7,7 @@ const CORE=[
   './problem-004.html',
   './korean.html',
   './subject-nav.js',
+  './korean-advanced.js',
   './manifest.webmanifest',
   './icons/study-icon.svg',
   './icons/study-icon-192.png',
@@ -35,18 +36,22 @@ self.addEventListener('activate',event=>{
   })());
 });
 
-async function withSubjectNav(response){
+async function withStudyScripts(response,requestUrl){
   if(!response) return response;
   const type=response.headers.get('content-type')||'';
   if(!type.includes('text/html')) return response;
 
-  const text=await response.text();
-  if(text.includes('subject-nav.js') || text.includes('class="subjects"')){
-    return new Response(text,{status:response.status,statusText:response.statusText,headers:response.headers});
+  let text=await response.text();
+  if(!text.includes('subject-nav.js') && !text.includes('class="subjects"')){
+    text=text.replace('</body>','<script src="./subject-nav.js"></script></body>');
   }
 
-  const injected=text.replace('</body>','<script src="./subject-nav.js"></script></body>');
-  return new Response(injected,{status:response.status,statusText:response.statusText,headers:response.headers});
+  const url=new URL(requestUrl);
+  if((url.pathname.endsWith('/korean.html') || url.pathname==='/korean.html') && !text.includes('korean-advanced.js')){
+    text=text.replace('</body>','<script src="./korean-advanced.js"></script></body>');
+  }
+
+  return new Response(text,{status:response.status,statusText:response.statusText,headers:response.headers});
 }
 
 self.addEventListener('fetch',event=>{
@@ -60,10 +65,10 @@ self.addEventListener('fetch',event=>{
         const fresh=await fetch(event.request);
         const cache=await caches.open(CACHE_NAME);
         cache.put(event.request,fresh.clone());
-        return await withSubjectNav(fresh);
+        return await withStudyScripts(fresh,event.request.url);
       }catch(e){
         const cached=(await caches.match(event.request)) || (await caches.match('./index.html'));
-        return await withSubjectNav(cached);
+        return await withStudyScripts(cached,event.request.url);
       }
     })());
     return;
