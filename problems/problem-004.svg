@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1781 883" role="img" aria-labelledby="title desc">
+  <title id="title">수학 문제 14번</title>
+  <desc id="desc">양수 a와 자연수 b에 대한 삼각함수 방정식의 서로 다른 실근 개수를 묻는 문제</desc>
+  <rect width="1781" height="883" fill="#fff"/>
+  <g fill="#000" font-family="Noto Serif KR, NanumMyeongjo, Batang, serif">
+    <text x="66" y="152" font-size="68" font-weight="700">14.</text>
+    <text x="181" y="152" font-size="58">양수 a와 자연수 b에 대하여 0 ≤ x ≤ 2일 때 x에 대한 방정식</text>
+
+    <g font-family="STIX Two Math, Cambria Math, Times New Roman, serif" font-size="64">
+      <text x="274" y="350">( cos(bπx) − 1/2 )( a cos(bπx) + (a + 2)/2 ) = 0</text>
+    </g>
+
+    <text x="87" y="554" font-size="58">의 서로 다른 실근의 개수는 15이다. a + b의 값은? [4점]</text>
+
+    <g font-size="52">
+      <text x="83" y="737">①  6</text>
+      <text x="405" y="737">②  13/2</text>
+      <text x="754" y="737">③  7</text>
+      <text x="1090" y="737">④  15/2</text>
+      <text x="1450" y="737">⑤  8</text>
+    </g>
+  </g>
+</svg>
