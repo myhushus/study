@@ -5,15 +5,13 @@
   // UI translations are separate from the authored Korean literature content.
   const messages = { ko: {
     title: '5단계 · 기출 대조 실전',
-    intro: '5지선다 {total}문항 · 개정 3. 답안을 수정하며 풀고, 전체 제출 후 채점과 해설을 확인하세요.',
-    notice: '2025·2026학년도 수능의 독해 구조를 대조한 창작 문항입니다. 동일한 정답률·난도가 검증된 것은 아닙니다. 〈산유화〉는 비교용이며 EBS 수록 여부를 표시한 것이 아닙니다.',
     passage: '작품 펼쳐 보기 · (가) 길 / (나) 산유화',
     gil: '(가) 김소월 〈길〉', sanyuhwa: '(나) 김소월 〈산유화〉',
     unavailable: '위의 작품 본문을 참고하세요.',
     source: '비교 작품: 위키문헌 『진달래꽃』 수록 본문 / 한국저작권위원회 공유마당 작품 정보. 띄어쓰기를 일부 정리했습니다.',
     textSource: '〈산유화〉 원문', rightsSource: '공유마당 작품 정보',
-    progress: '{answered}/{total}문항 응답 · 제출 전에는 정답이 표시되지 않습니다.',
-    score: '{total}문항 중 {correct}문항 정답 · 문항 번호를 눌러 해설을 확인하세요.',
+    progress: '{answered}/{total}문항 응답',
+    score: '{total}문항 중 {correct}문항 정답',
     navigation: '실전 문항 선택', unanswered: '미응답', answered: '응답 완료', correct: '정답', wrong: '오답',
     questionStatus: '{number}번 · {status}', question: '{number}. {stem}', option: '{number} {text}',
     view: '〈보기〉', reference: '참고 시구', previous: '이전 문항', next: '다음 문항', submit: '{total}문항 제출 · 채점', restart: '실전 다시 풀기',
@@ -22,10 +20,7 @@
     correctResult: '정답입니다. 정답 {answer} · 선택 {selected}',
     wrongResult: '오답입니다. 정답 {answer} · 선택 {selected}',
     explanations: '선택지별 판단 근거', storage: '이 브라우저에서 저장할 수 없어 현재 화면에서만 풀이가 유지됩니다.',
-    examLink: '실전 심화', benchmark: '기출 대조 기록', benchmarkSource: '{year}학년도 수능 국어 짝수형 {item}번',
-    skill: '판단할 것: {text}', transfer: '이번 문항에 적용한 구조: {text}',
-    limits: '대조는 풀이 구조에 관한 것입니다. 배점·정답률·변별도를 그대로 옮긴 것이 아닙니다.',
-    record: '전체 제작·검토 기록'
+    examLink: '실전 심화', sourceLabel: '출처'
   }};
   const locale = 'ko';
   const t = (key, values = {}) => messages[locale][key].replace(/\{(\w+)\}/g, (_, name) => String(values[name] ?? ''));
@@ -209,16 +204,17 @@
   };
   const host = el('section'); host.id = 'advanced-poetry'; host.setAttribute('aria-labelledby', 'adv-title');
   const heading = el('h2', t('title')); heading.id = 'adv-title';
-  host.append(heading, el('p', t('intro', { total: questions.length })), el('p', t('notice'), 'adv-muted'));
+  host.append(heading);
   const reading = el('details', undefined, 'adv-reading'); reading.append(el('summary', t('passage')));
   const passages = el('div', undefined, 'adv-passages');
   for (const [label, text] of [[t('gil'), document.querySelector('#poem .poem')?.textContent.trim() || t('unavailable')], [t('sanyuhwa'), comparisonPoem]]) {
     const panel = el('section'); panel.append(el('h3', label), el('div', text, 'adv-poem')); passages.append(panel);
   }
-  reading.append(passages, el('p', t('source'), 'adv-muted'));
+  reading.append(passages);
+  const sources = el('details'); sources.append(el('summary', t('sourceLabel')), el('p', t('source'), 'adv-muted'));
   const links = el('p', undefined, 'adv-links');
   links.append(link(t('textSource'), 'https://ko.wikisource.org/w/index.php?title=진달래꽃_(시집)/산유화&oldid=430577'), link(t('rightsSource'), 'https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?menuNo=200019&wrtSn=9029202'));
-  reading.append(links);
+  sources.append(links); reading.append(sources);
   const progress = el('p', undefined, 'adv-muted'); progress.setAttribute('role', 'status');
   const nav = el('nav', undefined, 'adv-nav'); nav.setAttribute('aria-label', t('navigation'));
   const question = el('h3'); question.id = 'adv-question'; question.tabIndex = -1;
@@ -275,15 +271,6 @@
     state.answers[state.index] = value; save(); notice.textContent = '';
     options.querySelectorAll('.adv-option').forEach((node, i) => node.classList.toggle('selected', i === value)); renderStatus();
   }
-  function renderBenchmark(q) {
-    const b = q.benchmark;
-    const details = el('details', undefined, 'adv-benchmark');
-    details.append(el('summary', t('benchmark')),
-      link(t('benchmarkSource', b), b.url + '#page=' + b.page),
-      el('p', t('skill', { text: b.skill })), el('p', t('transfer', { text: b.transfer })), el('p', t('limits'), 'adv-muted'),
-      link(t('record'), 'https://github.com/myhushus/study/blob/main/docs/korean-exam-v3-review.md'));
-    feedback.append(details);
-  }
   function render() {
     renderStatus(); storageNotice.hidden = storageAvailable;
     const q = questions[state.index]; question.textContent = t('question', { number: state.index + 1, stem: q.stem });
@@ -302,7 +289,7 @@
       const selected = state.answers[state.index];
       feedback.append(el('h4', t(selected === q.answer ? 'correctResult' : 'wrongResult', { answer: numerals[q.answer], selected: numerals[selected] })), el('p', q.rationale), el('h4', t('explanations')));
       const list = el('ol', undefined, 'adv-reasons'); q.reasons.forEach((reason, i) => list.append(el('li', t('option', { number: numerals[i], text: reason }))));
-      feedback.append(list); renderBenchmark(q);
+      feedback.append(list);
     }
     actions.replaceChildren();
     const previous = button(t('previous'), () => go(state.index - 1)); previous.disabled = state.index === 0; actions.append(previous);
