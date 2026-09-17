@@ -1,7 +1,8 @@
-const CACHE_NAME='study-pwa-v6';
+const CACHE_NAME='study-pwa-v7';
 const CORE=[
   './',
   './index.html',
+  './korean.html',
   './problem-002.html',
   './problem-003.html',
   './problem-004.html',
