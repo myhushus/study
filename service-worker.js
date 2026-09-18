@@ -1,5 +1,7 @@
-const CACHE_NAME='study-pwa-v15';
+const CACHE_NAME='study-pwa-v16';
 const CORE=[
+  './korean-chamhuirok.html',
+  './lessons/chamhuirok.js',
   './',
   './index.html',
   './problem-002.html',
