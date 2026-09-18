@@ -1,4 +1,4 @@
-const CACHE_NAME='study-pwa-v14';
+const CACHE_NAME='study-pwa-v15';
 const CORE=[
   './',
   './index.html',
