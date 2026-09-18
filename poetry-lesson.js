@@ -72,7 +72,7 @@
   const top=el('header',undefined,'top');
   const subjects=el('nav',undefined,'subjects');subjects.setAttribute('aria-label',t('subjects'));
   const math=link(t('math'),'index.html');math.className='subject';
-  const korean=link(t('korean'),'korean-spring.html');korean.className='subject active';korean.setAttribute('aria-current','page');subjects.append(math,korean);
+  const korean=link(t('korean'),location.pathname.split('/').pop() || 'korean.html');korean.className='subject active';korean.setAttribute('aria-current','page');subjects.append(math,korean);
   const topLinks=el('div',undefined,'toplinks');topLinks.append(link(t('read'),'#poem'),link(t('learn'),'#learn'),button(t('direct'),()=>goStage('advanced')),button(t('reset'),()=>{if(window.confirm(t('resetConfirm'))){state=fresh();save();render();question.focus();}}));top.append(subjects,topLinks);
   const hero=el('section',undefined,'poetry-hero');hero.append(el('p',lesson.ebsLabel,'poetry-eyebrow'),el('h1',`${lesson.author} 〈${lesson.title}〉`));
   const grid=el('div',undefined,'poetry-layout');
