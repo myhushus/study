@@ -1,5 +1,5 @@
-const CACHE_NAME='study-pwa-v19';
-const CORE=[
+const CACHE_NAME='study-pwa-v20';
+const CORE=[\n  './problems/geometry-38.svg',\n  './problems/geometry-37.svg',\n  './problems/geometry-36.svg',\n  './problems/geometry-35.svg',\n  './problems/geometry-34.svg',\n  './problems/geometry-33.svg',\n  './problems/geometry-32.svg',\n  './problems/geometry-31.svg',\n  './problems/geometry-30.svg',\n  './problems/geometry-29.svg',\n  './problem-014.html',\n  './problem-013.html',\n  './problem-012.html',\n  './problem-011.html',\n  './problem-010.html',\n  './problem-009.html',\n  './problem-008.html',\n  './problem-007.html',\n  './problem-006.html',\n  './problem-005.html',\n  './geometry-problem.js',\n  './math-geometry.css',\n  './math-geometry.html',
   './korean-samsugapsan.html',
   './lessons/samsugapsan.js',
   './korean-may.html',

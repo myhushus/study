@@ -72,7 +72,9 @@
   const top=el('header',undefined,'top');
   const subjects=el('nav',undefined,'subjects');subjects.setAttribute('aria-label',t('subjects'));
   const math=link(t('math'),'index.html');math.className='subject';
-  const korean=link(t('korean'),lesson.page || 'korean-spring.html');korean.className='subject active';korean.setAttribute('aria-current','page');subjects.append(math,korean);
+  const korean=link(t('korean'),lesson.page || 'korean-spring.html');korean.className='subject active';korean.setAttribute('aria-current','page');
+  const math2=link(t('math'),'math-geometry.html');math2.className='subject';math2.title='기하 문제';
+  subjects.append(math,korean,math2);
   const topLinks=el('div',undefined,'toplinks');topLinks.append(link(t('read'),'#poem'),link(t('learn'),'#learn'),button(t('direct'),()=>goStage('advanced')),button(t('reset'),()=>{if(window.confirm(t('resetConfirm'))){state=fresh();save();render();question.focus();}}));top.append(subjects,topLinks);
   const hero=el('section',undefined,'poetry-hero');hero.append(el('p',lesson.ebsLabel,'poetry-eyebrow'),el('h1',`${lesson.author} 〈${lesson.title}〉`));
   const grid=el('div',undefined,'poetry-layout');
