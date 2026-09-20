@@ -4,7 +4,7 @@
   if(!top||!brand||document.querySelector('.subjects'))return;
   const file=(location.pathname.split('/').pop()||'index.html').toLowerCase();
   const isKorean=file.startsWith('korean');
-  const isGeometry=file==='math-geometry.html'||/^problem-(00[5-9]|01[0-9]|02[0-4])\.html$/.test(file);
+  const isGeometry=file==='math-geometry.html'||/^problem-(00[5-9]|01[0-9]|02[0-9]|030)\.html$/.test(file);
   const links=[
     {label:'수학',href:'index.html',active:!isKorean&&!isGeometry,title:'기존 수학 문제'},
     {label:'국어',href:'korean.html',active:isKorean,title:'국어'},

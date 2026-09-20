@@ -1,5 +1,17 @@
-const CACHE_NAME='study-pwa-v21';
+const CACHE_NAME='study-pwa-v22';
 const CORE=[
+  './problems/geometry-11.svg',
+  './problems/geometry-10.svg',
+  './problems/geometry-8.svg',
+  './problems/geometry-7.svg',
+  './problems/geometry-5.svg',
+  './problems/geometry-4.svg',
+  './problem-030.html',
+  './problem-029.html',
+  './problem-028.html',
+  './problem-027.html',
+  './problem-026.html',
+  './problem-025.html',
   './problems/geometry-27.svg',
   './problems/geometry-21.svg',
   './problems/geometry-20.svg',
