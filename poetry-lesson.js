@@ -6,7 +6,7 @@
     math:'수학', korean:'국어', subjects:'과목 선택', read:'작품', learn:'문제', direct:'실전 바로 풀기',
     reset:'이 작품 처음부터', resetConfirm:'이 작품의 학습 기록만 지울까요? 다른 작품과 수학 기록은 유지됩니다.',
     loadingError:'학습 자료를 불러오지 못했습니다. 새로고침해 주세요.', reload:'새로고침',
-    source:'출처', stanza:'{number}연',
+    source:'출처', stanza:'{number}연', sijo:'제{number}수',
     guided:'1. 이해 유도', summary:'2. 핵심 정리', general:'3. 일반 문제', exam:'4. 수능형 연습', advanced:'5. 기출 대조 실전',
     stages:'학습 단계', locked:'{label} · 이전 단계 학습 후 열림', completed:'{label} · 학습 완료',
     progress:'{number} / {total}문항', question:'{number}. {text}', option:'{number} {text}',
@@ -80,7 +80,7 @@
   const grid=el('div',undefined,'poetry-layout');
   const poem=el('section',undefined,'poetry-card poetry-reading');poem.id='poem';
   const poemDetails=el('details');poemDetails.open=true;const poemLabel=el('summary',t('read'));poemDetails.append(poemLabel);
-  lesson.stanzas.forEach((text,i)=>{const part=el('div',undefined,'poetry-stanza');part.id=`${lesson.id}-stanza-${i+1}`;part.append(el('div',t('stanza',{number:i+1}),'poetry-stanza-number'),el('div',text,'poetry-text'));poemDetails.append(part);});
+  lesson.stanzas.forEach((text,i)=>{const part=el('div',undefined,'poetry-stanza');part.id=`${lesson.id}-stanza-${i+1}`;part.append(el('div',t(lesson.stanzaLabel==='sijo'?'sijo':'stanza',{number:i+1}),'poetry-stanza-number'),el('div',text,'poetry-text'));poemDetails.append(part);});
   const sources=el('details',undefined,'poetry-sources');sources.append(el('summary',t('source')),el('p',lesson.sourceNote));lesson.sources.forEach(s=>sources.append(link(s.label,s.url)));poemDetails.append(sources);poem.append(poemDetails);
   const learn=el('section',undefined,'poetry-card');learn.id='learn';
   const stageNav=el('nav',undefined,'poetry-stages');stageNav.setAttribute('aria-label',t('stages'));
