@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 820" role="img" aria-labelledby="title desc">
+<title id="title">수학 문제 14번 주관식</title>
+<desc id="desc">로그와 n제곱근에 관한 주관식 문제</desc>
+<rect width="1500" height="820" fill="#fff"/>
+<g fill="#111" font-family="Noto Serif KR, NanumMyeongjo, Batang, serif">
+<text x="70" y="120" font-size="72" font-weight="700">14.</text>
+<text x="195" y="120" font-size="52">2 이상의 자연수 n에 대하여</text>
+<text x="300" y="300" font-size="66" font-family="STIX Two Math, Cambria Math, Times New Roman, serif">log₂ a + log₂ |2 − 27/n| − 2</text>
+<text x="80" y="500" font-size="48">의 n제곱근 중 실수인 것의 개수를 f(n)이라 하자.</text>
+<text x="80" y="590" font-size="48">f(2m) ≤ 1을 만족시키는 자연수 m의 개수가 2가 되도록 하는</text>
+<text x="80" y="680" font-size="48">모든 자연수 a의 값의 합을 구하시오. [4점]</text>
+</g></svg>
