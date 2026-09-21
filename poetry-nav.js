@@ -2,9 +2,9 @@
   'use strict';
   if(document.querySelector('.poetry-library'))return;
   const top=document.querySelector('main .top');if(!top)return;
-  const messages={ko:{label:'시 작품 선택',gil:'김소월 · 길',spring:'이상화 · 빼앗긴 들에도 봄은 오는가',flower:'이육사 · 꽃',chamhuirok:'윤동주 · 참회록',paradise:'한용운 · 낙원은 가시덤불에서',may:'정지용 · 오월 소식',samsugapsan:'김소월 · 삼수갑산',easypoem:'윤동주 · 쉽게 씌어진 시',manheung:'윤선도 · 만흥',sangchungok:'정극인 · 상춘곡'}};
+  const messages={ko:{label:'시 작품 선택',gil:'김소월 · 길',spring:'이상화 · 빼앗긴 들에도 봄은 오는가',flower:'이육사 · 꽃',chamhuirok:'윤동주 · 참회록',paradise:'한용운 · 낙원은 가시덤불에서',may:'정지용 · 오월 소식',samsugapsan:'김소월 · 삼수갑산',easypoem:'윤동주 · 쉽게 씌어진 시',manheung:'윤선도 · 만흥',sangchungok:'정극인 · 상춘곡',jinjungeum:'이순신 · 진중음'}};
   const t=key=>(messages[document.documentElement.lang]||messages.ko)[key];
-  const entries=[{path:'korean.html',key:'gil'},{path:'korean-spring.html',key:'spring'},{path:'korean-flower.html',key:'flower'},{path:'korean-chamhuirok.html',key:'chamhuirok'},{path:'korean-paradise.html',key:'paradise'},{path:'korean-may.html',key:'may'},{path:'korean-samsugapsan.html',key:'samsugapsan'},{path:'korean-easypoem.html',key:'easypoem'},{path:'korean-manheung.html',key:'manheung'},{path:'korean-sangchungok.html',key:'sangchungok'}];
+  const entries=[{path:'korean.html',key:'gil'},{path:'korean-spring.html',key:'spring'},{path:'korean-flower.html',key:'flower'},{path:'korean-chamhuirok.html',key:'chamhuirok'},{path:'korean-paradise.html',key:'paradise'},{path:'korean-may.html',key:'may'},{path:'korean-samsugapsan.html',key:'samsugapsan'},{path:'korean-easypoem.html',key:'easypoem'},{path:'korean-manheung.html',key:'manheung'},{path:'korean-sangchungok.html',key:'sangchungok'},{path:'korean-jinjungeum.html',key:'jinjungeum'}];
   const filename=location.pathname.split('/').pop();if(!entries.some(x=>x.path===filename))return;
   const nav=document.createElement('nav');nav.className='poetry-library';nav.setAttribute('aria-label',t('label'));
   entries.forEach(({path,key})=>{const a=document.createElement('a');a.href=path;a.textContent=t(key);if(path===filename)a.setAttribute('aria-current','page');nav.append(a);});
