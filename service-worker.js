@@ -1,4 +1,4 @@
-const CACHE_NAME='study-pwa-v32';
+const CACHE_NAME='study-pwa-v33';
 const CORE=[
   './korean-gyuwonga.html',
   './lessons/gyuwonga.js',
