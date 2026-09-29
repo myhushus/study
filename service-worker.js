@@ -1,5 +1,7 @@
-const CACHE_NAME='study-pwa-v33';
+const CACHE_NAME='study-pwa-v34';
 const CORE=[
+  './korean-yusanga.html',
+  './lessons/yusanga.js',
   './korean-gyuwonga.html',
   './lessons/gyuwonga.js',
   './korean-myeonangjeongga.html',
