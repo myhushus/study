@@ -1,5 +1,7 @@
-const CACHE_NAME='study-pwa-v47';
+const CACHE_NAME='study-pwa-v48';
 const CORE=[
+  './korean-halfbloom.html',
+  './lessons/halfbloom.js',
   './korean-oriole.html',
   './lessons/oriole.js',
   './korean-aldervine.html',
