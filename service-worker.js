@@ -1,5 +1,21 @@
-const CACHE_NAME='study-pwa-v52';
+const CACHE_NAME='study-pwa-v53';
 const CORE=[
+  './math-upload-more-data.js',
+  './math-upload.html?lesson=20261011-7425-a',
+  './math-upload.html?lesson=20261011-7425-b',
+  './math-upload.html?lesson=20261011-7424-a',
+  './math-upload.html?lesson=20261011-7424-b',
+  './math-upload.html?lesson=20261011-7423-a',
+  './math-upload.html?lesson=20261011-7423-b',
+  './math-upload.html?lesson=20261011-7422-a',
+  './math-upload.html?lesson=20261011-7422-b',
+  './math-upload.html?lesson=20261011-7421-a',
+  './math-upload.html?lesson=20261011-7421-b',
+  './math-upload.html?lesson=20261011-7421-c',
+  './math-upload.html?lesson=20261011-7420-a',
+  './math-upload.html?lesson=20261011-7420-b',
+  './math-upload.html?lesson=20261011-7419-a',
+  './math-upload.html?lesson=20261011-7419-b',
   './math-upload.html',
   './math-upload.js',
   './math-upload.css',
