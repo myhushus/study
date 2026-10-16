@@ -1,5 +1,7 @@
-const CACHE_NAME='study-pwa-v53';
+const CACHE_NAME='study-pwa-v54';
 const CORE=[
+  './korean-mokdongga.html',
+  './lessons/mokdongga.js',
   './math-upload-more-data.js',
   './math-upload.html?lesson=20261011-7425-a',
   './math-upload.html?lesson=20261011-7425-b',
