@@ -25,7 +25,15 @@
     hintFallback:'표현의 주체와 어미, 앞뒤 문맥을 다시 확인하세요.'
   }};
   const locale = document.documentElement.lang.split('-')[0];
-  const dictionary = messages[locale] || messages.ko;
+  const dictionary = {...(messages[locale] || messages.ko)};
+  const textbookMode = mount.dataset.lessonMode === 'textbook';
+  if(textbookMode) Object.assign(dictionary, {
+    read:'교재 함께 보기', comparison:'(나) 비교 관점 · {author} 〈{title}〉 (원문 아님)',
+    exam:'4. 적용 연습',advanced:'5. 종합 실전',toExam:'적용 연습으로',toAdvanced:'종합 실전으로',
+    primary:'(가) 학습 대상 · {author} 〈{title}〉',
+    textbookNotice:'이 페이지는 시 전문을 싣지 않은 교재 병행형 학습입니다. 해당 작품을 교재에서 펼쳐 두고 풀어 주세요. 비교 글은 자체 작성한 독해 관점이며 시 원문이 아닙니다.',
+    authoredNotice:'작품별 8개 핵심 판단을 이해·적용·종합의 19문항으로 반복 확장한 연습입니다. 수능 기출을 복제하거나 동일 난도를 검증한 문항이 아닙니다.'
+  });
   const t = (key, values = {}) => (dictionary[key] || key).replace(/\{(\w+)\}/g, (_, name) => String(values[name] ?? ''));
   const el = (tag, text, cls) => {const n=document.createElement(tag); if(text!==undefined)n.textContent=text; if(cls)n.className=cls; return n;};
   const button = (text, fn, cls='') => {const b=el('button',text,cls);b.type='button';b.addEventListener('click',fn);return b;};
@@ -38,7 +46,7 @@
     keys.every(k=>Array.isArray(lesson.stages?.[k]) && lesson.stages[k].length>0 && lesson.stages[k].every(q=>
       typeof q.stem==='string' && Array.isArray(q.options) && q.options.length>=2 && q.options.length<=5 &&
       Number.isInteger(q.answer) && q.answer>=0 && q.answer<q.options.length &&
-      (k!=='advanced' || q.options.length===5 && Array.isArray(q.reasons) && q.reasons.length===5 && q.benchmark)));
+      (k!=='advanced' || q.options.length===5 && Array.isArray(q.reasons) && q.reasons.length===5 && (q.benchmark || textbookMode && q.practiceBasis?.type === 'authored-concept'))));
   if(!valid){mount.replaceChildren(el('p',t('loadingError')),button(t('reload'),()=>location.reload()));return;}
   mount.dataset.ready='true';
   document.title=`Study · ${lesson.author} 〈${lesson.title}〉`;
@@ -80,6 +88,10 @@
   const grid=el('div',undefined,'poetry-layout');
   const poem=el('section',undefined,'poetry-card poetry-reading');poem.id='poem';
   const poemDetails=el('details');poemDetails.open=true;const poemLabel=el('summary',t('read'));poemDetails.append(poemLabel);
+  if(textbookMode){
+    poemDetails.append(el('p',t('textbookNotice'),'textbook-notice'),el('p',t('authoredNotice'),'poetry-muted'));
+    if(lesson.readingNote)poemDetails.append(el('p',lesson.readingNote,'poetry-muted'));
+  }
   lesson.stanzas.forEach((text,i)=>{const part=el('div',undefined,'poetry-stanza');part.id=`${lesson.id}-stanza-${i+1}`;part.append(el('div',t(['sijo','passage'].includes(lesson.stanzaLabel)?lesson.stanzaLabel:'stanza',{number:i+1}),'poetry-stanza-number'),el('div',text,'poetry-text'));poemDetails.append(part);});
   const sources=el('details',undefined,'poetry-sources');sources.append(el('summary',t('source')),el('p',lesson.sourceNote));lesson.sources.forEach(s=>sources.append(link(s.label,s.url)));poemDetails.append(sources);poem.append(poemDetails);
   const learn=el('section',undefined,'poetry-card');learn.id='learn';
