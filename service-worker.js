@@ -1,5 +1,19 @@
-const CACHE_NAME='study-pwa-v57';
+const CACHE_NAME='study-pwa-v58';
 const CORE=[
+  './math-upload-photos7444-data.js',
+  './math-upload.html?lesson=photos-7444-a',
+  './math-upload.html?lesson=photos-7444-b',
+  './math-upload.html?lesson=photos-7443-a',
+  './math-upload.html?lesson=photos-7443-b',
+  './math-upload.html?lesson=photos-7442-a',
+  './math-upload.html?lesson=photos-7442-b',
+  './math-upload.html?lesson=photos-7441-a',
+  './math-upload.html?lesson=photos-7441-b',
+  './math-upload.html?lesson=photos-7440-a',
+  './math-upload.html?lesson=photos-7440-b',
+  './math-upload.html?lesson=photos-7439-a',
+  './math-upload.html?lesson=photos-7438-a',
+  './math-upload.html?lesson=photos-7438-b',
   './korean-library.html',
   './poetry-catalog.js',
   './poetry-library.js',
